@@ -45,10 +45,13 @@ class NewsViewController: UIViewController {
             newsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         newsTableView.clipsToBounds = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPressed(_:)))
+        addButton.tintColor = .black
+        navigationItem.setRightBarButton(addButton, animated: true)
     }
     
-    
-    @IBAction func addPressed(_ sender: UIBarButtonItem) {
+    @objc func addPressed(_ sender: UIBarButtonItem) {
         print(self.array.first?.title)
     }
 }

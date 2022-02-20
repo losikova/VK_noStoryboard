@@ -26,6 +26,15 @@ class vkJSON {
                 print("Catch error", error.localizedDescription)
             }
             
+            DispatchQueue.main.async{
+                            do {
+                                let codableData = try JSONDecoder().decode ([PostsJSON].self, from: validData)
+                                complition?(codableData)
+                            } catch let error {
+                                print( "Catch error", error.localizedDescription)
+                            }
+                        }
+            
         }.resume()
     }
 }
