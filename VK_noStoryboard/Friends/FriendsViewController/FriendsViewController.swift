@@ -8,14 +8,13 @@
 import UIKit
 
 class FriendsViewController: UIViewController {
-//    let reusableIdentifierCell = "reusableIdentifierCustomTableViewCell"
-//    let friendsCellPressedSegue = "friendsCellPressed"
+    
     let friendsTableView = UITableView()
     var friendsArray = [User]()
     var sectionLetters = [String]()
     
     let friendsNames = [
-        "Adele": [UIImage(named: "Adele")!],
+        "Adele": [UIImage(named: "Adele")!, UIImage(named: "Adele")!, UIImage(named: "Adele")!],
         "Cate Blanchett": [UIImage(named: "Cate Blanchett")!],
         "Damiano David": [UIImage(named: "Damiano David")!],
         "Emily Blunt": [UIImage(named: "Emily Blunt")!],
@@ -45,14 +44,6 @@ class FriendsViewController: UIViewController {
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == friendsCellPressedSegue,
-//           let galleryViewController = segue.destination as? GalleryViewController,
-//           let friend = sender as? User {
-//            galleryViewController.photos = friend.photos
-//        }
-//    }
     
     private func setup() {
         self.title = "Friends"

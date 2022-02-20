@@ -83,7 +83,7 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AllGroupsViewController: UISearchBarDelegate, CustomTableViewCellProtocol {
-    func performSegueAfterTap(row: IndexPath) {
+    func performAfterTap(row: IndexPath) {
         tableView(allGroupsTableView, didSelectRowAt: row)
     }
     

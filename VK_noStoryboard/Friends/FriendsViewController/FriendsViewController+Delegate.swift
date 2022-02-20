@@ -9,7 +9,7 @@ import UIKit
 
 extension FriendsViewController: UITableViewDelegate, CustomTableViewCellProtocol {
     
-    func performSegueAfterTap(row: IndexPath) {
+    func performAfterTap(row: IndexPath) {
         tableView(friendsTableView, didSelectRowAt: row)
     }
     

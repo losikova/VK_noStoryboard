@@ -8,18 +8,17 @@
 import UIKit
 
 protocol CustomTableViewCellProtocol: AnyObject {
-    func performSegueAfterTap(row: IndexPath)
+    func performAfterTap(row: IndexPath)
+}
+
+protocol DidTapOnAvatarProtocol: AnyObject {
+    func imagePressed()
 }
 
 class CustomTableViewCell: UITableViewCell {
     
 //    let friendsTableViewCell = UIView()
-    let avatarImageView: UIImageView = {
-        let image = UIImageView()
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(imagePressed(_:)))
-        image.addGestureRecognizer(tapRecognizer)
-        return image
-    }()
+    let avatarImageView = UIImageView()
     let nameLabel = UILabel()
     
     static let identifier = "reusableIdentifierCustomTableViewCell"     //почему static
@@ -54,7 +53,7 @@ class CustomTableViewCell: UITableViewCell {
     
     }
     
-    @objc func imagePressed(_ sender: UIView) {
+    @objc func imagePressed() {
         let scale: CGFloat = 20
         let frame = avatarImageView.frame
         
@@ -67,23 +66,43 @@ class CustomTableViewCell: UITableViewCell {
             self.avatarImageView.frame = CGRect(x: frame.origin.x - scale/2, y: frame.origin.y - scale/2, width: frame.width + scale, height: frame.height + scale)
         },
                        completion: {_ in
-            self.delegate?.performSegueAfterTap(row: self.rowNumber)
+            self.delegate?.performAfterTap(row: self.rowNumber)
         })
     }
     
     private func setupUI() {
-        addSubview(avatarImageView)
+        let view = UIView()
+        contentView.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1),
+            view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            view.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
+            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+        ])
+        
+        view.layer.cornerRadius = view.bounds.width / 2
+        view.layer.shadowColor = UIColor.red.cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 4
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        
+        view.addSubview(avatarImageView)
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor, multiplier: 1),
-            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
-            avatarImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
+            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            avatarImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            avatarImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         avatarImageView.clipsToBounds = true
         avatarImageView.contentMode = .scaleAspectFill
+        avatarImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(imagePressed))
+        avatarImageView.addGestureRecognizer(tap)
         
-        addSubview(nameLabel)
+        
+        contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
@@ -97,8 +116,8 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 extension CustomTableViewCell: CustomTableViewCellProtocol {
-    func performSegueAfterTap(row: IndexPath) {
-        delegate?.performSegueAfterTap(row: row)
+    func performAfterTap(row: IndexPath) {
+        delegate?.performAfterTap(row: row)
     }
     
     

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058A27C23CB50014E39E /* GalleryViewController.swift */; };
+		B263058E27C23CED0014E39E /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */; };
+		B263059127C240AB0014E39E /* BottomViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059027C240AB0014E39E /* BottomViewItem.swift */; };
+		B263059327C240ED0014E39E /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059227C240ED0014E39E /* AvatarView.swift */; };
 		B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782B9E27C120C900977F87 /* AppDelegate.swift */; };
 		B2782BA127C120C900977F87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BA027C120C900977F87 /* SceneDelegate.swift */; };
 		B2782BA927C120C900977F87 /* VK_noStoryboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2782BA727C120C900977F87 /* VK_noStoryboard.xcdatamodeld */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B263058A27C23CB50014E39E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		B263059027C240AB0014E39E /* BottomViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewItem.swift; sourceTree = "<group>"; };
+		B263059227C240ED0014E39E /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		B2782B9B27C120C900977F87 /* VK_noStoryboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_noStoryboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2782B9E27C120C900977F87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2782BA027C120C900977F87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B263058C27C23CBD0014E39E /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				B263058A27C23CB50014E39E /* GalleryViewController.swift */,
+				B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		B2782B9227C120C900977F87 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +107,7 @@
 		B2782B9D27C120C900977F87 /* VK_noStoryboard */ = {
 			isa = PBXGroup;
 			children = (
+				B2782BC127C14B1C00977F87 /* Subviews */,
 				B2782BE027C16AAE00977F87 /* Model */,
 				B2782BB727C121CA00977F87 /* Login */,
 				B2782BC627C15DE800977F87 /* TabBarViewController.swift */,
@@ -113,7 +131,6 @@
 				B2782BC227C14E2B00977F87 /* LoginViewController+notifications.swift */,
 				B2782BBB27C1321500977F87 /* LoginView.swift */,
 				B2782BC427C1537700977F87 /* LoginView+actions.swift */,
-				B2782BC127C14B1C00977F87 /* Subviews */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -123,6 +140,8 @@
 			children = (
 				B2782BBD27C1372000977F87 /* LoginInputView.swift */,
 				B2782BBF27C1455600977F87 /* LoadingView.swift */,
+				B263059027C240AB0014E39E /* BottomViewItem.swift */,
+				B263059227C240ED0014E39E /* AvatarView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -130,6 +149,7 @@
 		B2782BC827C1622200977F87 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				B263058C27C23CBD0014E39E /* Gallery */,
 				B2782BD727C16A0900977F87 /* FriendsViewController */,
 				B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */,
 			);
@@ -248,13 +268,17 @@
 				B2782BC527C1537700977F87 /* LoginView+actions.swift in Sources */,
 				B2782BBC27C1321500977F87 /* LoginView.swift in Sources */,
 				B2782BD627C1668F00977F87 /* NewsViewController.swift in Sources */,
+				B263058E27C23CED0014E39E /* GalleryCollectionViewCell.swift in Sources */,
 				B2782BDB27C16A3B00977F87 /* FriendsViewController+DataSource.swift in Sources */,
+				B263059127C240AB0014E39E /* BottomViewItem.swift in Sources */,
 				B2782BB627C121C100977F87 /* LoginViewController.swift in Sources */,
+				B263059327C240ED0014E39E /* AvatarView.swift in Sources */,
 				B2782BDF27C16A7C00977F87 /* CustomTableViewCell.swift in Sources */,
 				B2782BE427C16ACB00977F87 /* GroupModel.swift in Sources */,
 				B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */,
 				B2782BD227C1652500977F87 /* FriendsViewController.swift in Sources */,
 				B2782BE627C16ADB00977F87 /* vkJSON.swift in Sources */,
+				B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */,
 				B2782BD927C16A2500977F87 /* FriendsViewController+DataFill.swift in Sources */,
 				B2782BA927C120C900977F87 /* VK_noStoryboard.xcdatamodeld in Sources */,
 				B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */,

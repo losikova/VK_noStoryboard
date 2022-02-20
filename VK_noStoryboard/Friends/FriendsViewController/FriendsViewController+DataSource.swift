@@ -29,8 +29,12 @@ extension FriendsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = friendsBySection(letter: sectionLetters[indexPath.section])
+        let friend = section[indexPath.row]
+        let galleryController = GalleryViewController()
         
-//        performSegue(withIdentifier: friendsCellPressedSegue, sender: section[indexPath.row])
+        galleryController.photos = friend.photos
+        
+        navigationController?.pushViewController(galleryController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
