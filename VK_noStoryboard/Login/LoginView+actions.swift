@@ -12,6 +12,7 @@ extension LoginView {
     @objc func loginButtonPressed(_ sender: UIButton) {
         let login = self.loginInputView.loginInput.text!
         let password = self.loginInputView.passwordInput.text!
+        let session = Session.instance
 
         // Проверяем, верны ли они
         if login == "Admin" && password == "123456" {
@@ -20,6 +21,8 @@ extension LoginView {
             Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
                 let succesfullNotification = Notification.Name("succesfullEnter")
                 NotificationCenter.default.post(name: succesfullNotification, object: nil)
+                session.token = "23ef324feoih039inw"
+                session.userId = 1232132
             })
     
         } else {
