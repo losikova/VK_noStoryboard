@@ -7,14 +7,18 @@
 
 import UIKit
 
+protocol DidSelectGroupProtocol: AnyObject {
+    func selectGroup(_ selectedGroup: Group?)
+}
+
 class AllGroupsViewController: UIViewController {
     
     let allGroupsTableView = UITableView()
     let searchBar = UISearchBar()
     
-//    let reuseIdentifierGroups = "reuseIdentifierGroups"
     var groupArray = [Group]()
-    var selectedGroup: Group?
+    var delegate: DidSelectGroupProtocol?
+//    var selectedGroup: Group?
     var savedGroupArray = [Group]()
     
     let groupsNames = [
@@ -47,6 +51,7 @@ class AllGroupsViewController: UIViewController {
         self.title = "All Groups"
         
         view.addSubview(allGroupsTableView)
+        
         allGroupsTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             allGroupsTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -76,8 +81,12 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedGroup = groupArray[indexPath.row]
-        performSegue(withIdentifier: "addGroup", sender: nil)
+        delegate?.selectGroup(groupArray[indexPath.row])
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        searchBar
     }
     
 }

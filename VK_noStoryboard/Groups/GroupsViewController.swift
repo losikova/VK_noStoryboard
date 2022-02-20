@@ -11,7 +11,6 @@ class GroupsViewController: UIViewController {
 
     let userGroupsTableView = UITableView()
     
-//    let reuseIdentifierGroups = "reuseIdentifierGroups"
     var groupArray = [Group]()
     
     override func viewDidLoad() {
@@ -51,19 +50,9 @@ class GroupsViewController: UIViewController {
     
     @objc private func searchGroups() {
         let allGroupsController = AllGroupsViewController()
+        allGroupsController.delegate = self
         navigationController?.pushViewController(allGroupsController, animated: true)
     }
-    
-//    @IBAction func unwindAddGroup(segue: UIStoryboardSegue) {
-//        if segue.identifier == "addGroup",
-//           let allGroupsViewController = segue.source as? AllGroupsViewController,
-//           let selectedGroup = allGroupsViewController.selectedGroup as? Group {
-//            if isItemAlreadyInArraay(group: selectedGroup) {return}
-//            self.groupArray.append(selectedGroup)
-//            userGroupsTableView.reloadData()
-//        }
-//
-//    }
     
 }
 
@@ -85,4 +74,14 @@ extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+}
+
+extension GroupsViewController: DidSelectGroupProtocol {
+    func selectGroup(_ selectedGroup: Group?) {
+        guard let selectedGroup = selectedGroup else {return}
+        if isItemAlreadyInArraay(group: selectedGroup) {return}
+        self.groupArray.append(selectedGroup)
+        userGroupsTableView.reloadData()
+    }
+    
 }
