@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(succesfullEnter(notification:)), name: succesfullNotification, object: nil)
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
-        tapRecognizer.cancelsTouchesInView = false
+//        tapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapRecognizer)
         
         setupUI()

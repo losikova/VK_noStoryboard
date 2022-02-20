@@ -44,7 +44,7 @@ class GroupsViewController: UIViewController {
         userGroupsTableView.clipsToBounds = true
         
         let searchGroupsButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchGroups))
-        searchGroupsButton.tintColor = .black
+        searchGroupsButton.tintColor = .systemBlue
         navigationItem.setRightBarButton(searchGroupsButton, animated: true)
     }
     
