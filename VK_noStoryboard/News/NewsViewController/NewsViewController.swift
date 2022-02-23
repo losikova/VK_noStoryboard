@@ -47,7 +47,7 @@ class NewsViewController: UIViewController {
         newsTableView.clipsToBounds = true
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPressed(_:)))
-        addButton.tintColor = .black
+        addButton.tintColor = .systemBlue
         navigationItem.setRightBarButton(addButton, animated: true)
     }
     

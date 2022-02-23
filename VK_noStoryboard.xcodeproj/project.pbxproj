@@ -13,6 +13,7 @@
 		B263059327C240ED0014E39E /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059227C240ED0014E39E /* AvatarView.swift */; };
 		B263059627C271A90014E39E /* NewsViewController+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059527C271A90014E39E /* NewsViewController+JSON.swift */; };
 		B263059827C271B50014E39E /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059727C271B50014E39E /* NewsTableViewCell.swift */; };
+		B263059B27C279C00014E39E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059A27C279C00014E39E /* Session.swift */; };
 		B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782B9E27C120C900977F87 /* AppDelegate.swift */; };
 		B2782BA127C120C900977F87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BA027C120C900977F87 /* SceneDelegate.swift */; };
 		B2782BA927C120C900977F87 /* VK_noStoryboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2782BA727C120C900977F87 /* VK_noStoryboard.xcdatamodeld */; };
@@ -45,6 +46,7 @@
 		B263059227C240ED0014E39E /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		B263059527C271A90014E39E /* NewsViewController+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsViewController+JSON.swift"; sourceTree = "<group>"; };
 		B263059727C271B50014E39E /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		B263059A27C279C00014E39E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		B2782B9B27C120C900977F87 /* VK_noStoryboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_noStoryboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2782B9E27C120C900977F87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2782BA027C120C900977F87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				B2782BE127C16ABB00977F87 /* UserModel.swift */,
 				B2782BE327C16ACB00977F87 /* GroupModel.swift */,
 				B2782BE527C16ADB00977F87 /* vkJSON.swift */,
+				B263059A27C279C00014E39E /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B263059B27C279C00014E39E /* Session.swift in Sources */,
 				B2782BD427C1666D00977F87 /* GroupsViewController.swift in Sources */,
 				B2782BC527C1537700977F87 /* LoginView+actions.swift in Sources */,
 				B2782BBC27C1321500977F87 /* LoginView.swift in Sources */,
