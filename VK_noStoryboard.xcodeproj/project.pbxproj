@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D8C47CD174E6A589A1901C0 /* Pods_VK_noStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */; };
+		B248AE3D27CBF5D900C5CD54 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */; };
 		B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058A27C23CB50014E39E /* GalleryViewController.swift */; };
 		B263058E27C23CED0014E39E /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */; };
 		B263059127C240AB0014E39E /* BottomViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059027C240AB0014E39E /* BottomViewItem.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.release.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.release.xcconfig"; sourceTree = "<group>"; };
 		86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.debug.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.debug.xcconfig"; sourceTree = "<group>"; };
+		B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		B263058A27C23CB50014E39E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B263059027C240AB0014E39E /* BottomViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewItem.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		B2782B9D27C120C900977F87 /* VK_noStoryboard */ = {
 			isa = PBXGroup;
 			children = (
+				B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */,
 				B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */,
 				B2782BC127C14B1C00977F87 /* Subviews */,
 				B2782BE027C16AAE00977F87 /* Model */,
@@ -232,7 +235,6 @@
 				86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */,
 				710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -372,6 +374,7 @@
 				B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */,
 				B2782BC027C1455600977F87 /* LoadingView.swift in Sources */,
 				B2782BBE27C1372000977F87 /* LoginInputView.swift in Sources */,
+				B248AE3D27CBF5D900C5CD54 /* WKWebViewController.swift in Sources */,
 				B2782BC327C14E2B00977F87 /* LoginViewController+notifications.swift in Sources */,
 				B263059627C271A90014E39E /* NewsViewController+JSON.swift in Sources */,
 				B2782BC727C15DE800977F87 /* TabBarViewController.swift in Sources */,
@@ -524,6 +527,7 @@
 				INFOPLIST_FILE = VK_noStoryboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -552,6 +556,7 @@
 				INFOPLIST_FILE = VK_noStoryboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
