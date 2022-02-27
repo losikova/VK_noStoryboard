@@ -11,7 +11,15 @@ import WebKit
 
 class WKWebViewController: UIViewController {
     
-    let webView = WKWebView()
+    var webView = WKWebView()
+    let session = Session.instance
+    
+    enum Objects: String {
+        case friends = "/friends.get"
+        case photos = "/photos.get"
+        case groups = "/groups.get"
+        case groupOf = "/groups.search"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +29,7 @@ class WKWebViewController: UIViewController {
     }
     
     private func setupUI() {
+        webView.navigationDelegate = self
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -38,7 +47,7 @@ class WKWebViewController: UIViewController {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "8089974"),
+            URLQueryItem(name: "client_id", value: "8089981"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "262150"),

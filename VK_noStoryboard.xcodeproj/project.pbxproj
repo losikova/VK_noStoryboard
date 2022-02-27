@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D8C47CD174E6A589A1901C0 /* Pods_VK_noStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */; };
 		B248AE3D27CBF5D900C5CD54 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */; };
+		B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */; };
 		B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058A27C23CB50014E39E /* GalleryViewController.swift */; };
 		B263058E27C23CED0014E39E /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */; };
 		B263059127C240AB0014E39E /* BottomViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263059027C240AB0014E39E /* BottomViewItem.swift */; };
@@ -45,6 +46,7 @@
 		710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.release.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.release.xcconfig"; sourceTree = "<group>"; };
 		86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.debug.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.debug.xcconfig"; sourceTree = "<group>"; };
 		B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebViewController+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		B263058A27C23CB50014E39E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		B263058D27C23CED0014E39E /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B263059027C240AB0014E39E /* BottomViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewItem.swift; sourceTree = "<group>"; };
@@ -100,6 +102,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B248AE3E27CBFF4900C5CD54 /* WKWebView */ = {
+			isa = PBXGroup;
+			children = (
+				B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */,
+				B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */,
+			);
+			path = WKWebView;
+			sourceTree = "<group>";
+		};
 		B263058C27C23CBD0014E39E /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +150,7 @@
 		B2782B9D27C120C900977F87 /* VK_noStoryboard */ = {
 			isa = PBXGroup;
 			children = (
-				B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */,
+				B248AE3E27CBFF4900C5CD54 /* WKWebView */,
 				B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */,
 				B2782BC127C14B1C00977F87 /* Subviews */,
 				B2782BE027C16AAE00977F87 /* Model */,
@@ -369,6 +380,7 @@
 				B2782BD227C1652500977F87 /* FriendsViewController.swift in Sources */,
 				B2782BE627C16ADB00977F87 /* vkJSON.swift in Sources */,
 				B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */,
+				B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */,
 				B2782BD927C16A2500977F87 /* FriendsViewController+DataFill.swift in Sources */,
 				B2782BA927C120C900977F87 /* VK_noStoryboard.xcdatamodeld in Sources */,
 				B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */,
