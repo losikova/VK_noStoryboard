@@ -7,34 +7,56 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class vkJSON {
-    func reguest(complition: (([PostsJSON]) -> ())?) {
-        guard let httpURL = URL(string: "https://jsonplaceholder.typicode.com/posts") else {return}
-        let httpSession = URLSession.shared.dataTask(with: httpURL) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
-            guard let validData = data else {return}
-            
-            do {
-                let codableData = try JSONDecoder().decode([PostsJSON].self, from: validData)
-                
-                print(codableData.first?.title)
-            } catch let error {
-                print("Catch error", error.localizedDescription)
-            }
-            
-            DispatchQueue.main.async{
-                            do {
-                                let codableData = try JSONDecoder().decode ([PostsJSON].self, from: validData)
-                                complition?(codableData)
-                            } catch let error {
-                                print( "Catch error", error.localizedDescription)
-                            }
-                        }
-            
-        }.resume()
+    
+    init(token: String) {
+        params["access_token"] = token
     }
+    
+//    enum Objects: String {
+//        case friends = "/friends.get"
+//        case photos = "/photos.get"
+//        case groups = "/groups.get"
+//        case groupOf = "/groups.search"
+//    }
+    
+    private let baseUrl = "https://api.vk.com/method"
+    
+    private var params: Parameters = [
+        "access_token": "",
+        "v": "5.131"
+    ]
+    
+    func getFriends(completion: @escaping ([User]) -> Void) {
+        params["fields"] = "nickname,photo_200_orig"
+        let url = baseUrl + "/friends.get"
+        
+        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+            guard let data = response.value else { return }
+            var friends = [User]()
+
+            DispatchQueue.main.async {
+                do {
+                    friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
+                    print(friends)
+                    completion(friends)
+                } catch {
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    //        if objects == .photos {
+    //            params["album_id"] = "profile"
+    //        }
+    //
+    //        if objects == .groupOf {
+    //            params["q"] = "Music"
+    //        }s
+    
+    
 }

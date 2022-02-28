@@ -10,8 +10,10 @@ import UIKit
 class FriendsViewController: UIViewController {
     
     let friendsTableView = UITableView()
-    var friendsArray = [User]()
+    var friendsArray = [Friend]()
     var sectionLetters = [String]()
+    
+    let webService = vkJSON(token: Session.instance.token)
     
     let friendsNames = [
         "Adele": [UIImage(named: "Adele")!, UIImage(named: "Adele")!, UIImage(named: "Adele")!],

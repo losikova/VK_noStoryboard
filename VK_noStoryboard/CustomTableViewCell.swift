@@ -32,13 +32,13 @@ class CustomTableViewCell: UITableViewCell {
         nameLabel.text = nil
     }
     
-    func configure(friend: User) {
+    func configure(friend: Friend) {
         avatarImageView.image = friend.avatar
         nameLabel.text = friend.name
         setupUI()
     }
     
-    func configure(group: Group) {
+    func configure(group: GroupUI) {
         avatarImageView.image = group.icon
         nameLabel.text = group.name
         setupUI()

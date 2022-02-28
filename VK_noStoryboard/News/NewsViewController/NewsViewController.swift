@@ -32,7 +32,7 @@ class NewsViewController: UIViewController {
         newsTableView.dataSource = self
         
         setupUI()
-        getData()
+//        getData()
     }
     
     private func setupUI() {

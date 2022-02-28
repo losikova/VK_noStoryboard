@@ -7,10 +7,15 @@
 
 import UIKit
 
-struct User {
+struct Friend {
     var name: String
     var avatar: UIImage
     var photos: [UIImage]
+}
+
+struct GroupUI {
+    var name: String
+    var icon: UIImage
 }
 
 struct PostsJSON: Decodable {
@@ -19,4 +24,3 @@ struct PostsJSON: Decodable {
     var title: String
     var body: String
 }
-

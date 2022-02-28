@@ -11,7 +11,7 @@ class GroupsViewController: UIViewController {
 
     let userGroupsTableView = UITableView()
     
-    var groupArray = [Group]()
+    var groupArray = [GroupUI]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class GroupsViewController: UIViewController {
         setup()
     }
     
-    func isItemAlreadyInArraay(group: Group) -> Bool {
+    func isItemAlreadyInArraay(group: GroupUI) -> Bool {
         return groupArray.contains{sourceGroup in
             sourceGroup.name == group.name
         }
@@ -77,7 +77,7 @@ extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension GroupsViewController: DidSelectGroupProtocol {
-    func selectGroup(_ selectedGroup: Group?) {
+    func selectGroup(_ selectedGroup: GroupUI?) {
         guard let selectedGroup = selectedGroup else {return}
         if isItemAlreadyInArraay(group: selectedGroup) {return}
         self.groupArray.append(selectedGroup)

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 import WebKit
 
 extension WKWebViewController: WKNavigationDelegate {
@@ -31,36 +30,20 @@ extension WKWebViewController: WKNavigationDelegate {
         guard let token = params["access_token"] else { return }
         
         session.token = token
-        print(token)
         
-        getList(of: .friends)
-        getList(of: .photos)
-        getList(of: .groups)
-        getList(of: .groupOf)
+        let sessionJSON = vkJSON(token: token)
+        
+        sessionJSON.getFriends { friends in
+            print(friends[0].first_name)
+        }
+//        sessionJSON.getList(of: .photos)
+//        sessionJSON.getList(of: .groups)
+//        sessionJSON.getList(of: .groupOf)
         
         decisionHandler(.cancel)
-    }
-    
-    private func getList(of objects: Objects) {
-        let baseUrl = "https://api.vk.com/method"
         
-        var params: Parameters = [
-            "access_token": session.token,
-            "v": "5.131"
-        ]
-        
-        if objects == .photos {
-            params["album_id"] = "profile"
-        }
-        
-        if objects == .groupOf {
-            params["q"] = "Music"
-        }
-        
-        let url = baseUrl + objects.rawValue
-        
-        Alamofire.request(url, method: .get, parameters: params).responseJSON { repsonse in
-            print("\(objects): \(repsonse.value)")
-        }
+//        let tabBarController = TabBarViewController()
+//        tabBarController.modalPresentationStyle = .fullScreen
+//        present(tabBarController, animated: true, completion: nil)
     }
 }
