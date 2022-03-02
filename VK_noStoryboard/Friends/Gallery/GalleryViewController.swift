@@ -8,6 +8,11 @@
 import UIKit
 
 class GalleryViewController: UIViewController {
+    
+    let webService = vkJSON(token: Session.instance.token)
+    var photos = [UIImage]()
+    var userId = 0
+    let loadingView = LoadingView()
 
     let galleryCollectionView : UICollectionView = {
         let size = (UIScreen.main.bounds.width - 9) / 2
@@ -22,8 +27,6 @@ class GalleryViewController: UIViewController {
         return view
     }()
     
-    var photos = [UIImage]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +35,10 @@ class GalleryViewController: UIViewController {
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
         
+        print("Tapped User ID: \(userId)")
         setupUI()
+        
+        fillPhotosArray()
     }
     
     private func setupUI() {
@@ -46,7 +52,36 @@ class GalleryViewController: UIViewController {
         ])
         galleryCollectionView.clipsToBounds = true
         
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingView.heightAnchor.constraint(equalToConstant: 60),
+            loadingView.widthAnchor.constraint(equalToConstant: 240)
+        ])
+        loadingView.clipsToBounds = true
+        loadingView.isHidden = false
+        loadingView.animateLoading()
+        
         view.layoutIfNeeded()
+    }
+    
+    private func fillPhotosArray() {
+        webService.getPhotos(of: userId) { [weak self] photos in
+            for photo in photos {
+                for photoSize in photo.sizes where photoSize.type == "r" {
+                    let url = URL(string: photoSize.url)!
+                    let imageData = try? Data(contentsOf: url)
+                    let onePhoto = UIImage(data: imageData!)
+                    
+                    self?.photos.append(onePhoto!)
+                    
+                }
+            }
+            self?.loadingView.isHidden = true
+            self?.galleryCollectionView.reloadData()
+        }
     }
 
 }

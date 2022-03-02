@@ -39,7 +39,6 @@ class vkJSON {
             
             do {
                 friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
-                //                    print(friends)
                 completion(friends)
             } catch {
                 print(error)
@@ -49,10 +48,27 @@ class vkJSON {
         }
     }
     
-    //        if objects == .photos {
-    //            params["album_id"] = "profile"
-    //        }
-    //
+    func getPhotos(of userID: Int, completion: @escaping ([Photo]) -> Void) {
+        params["album_id"] = "profile"
+        params["owner_id"] = userID
+        params["extended"] = 1
+        
+        let url = baseUrl + "/photos.get"
+
+        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+            guard let data = response.value else { return }
+//            var photos = [Photo]()
+
+            do {
+                let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
+                print(photos)
+                completion(photos)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     //        if objects == .groupOf {
     //            params["q"] = "Music"
     //        }s

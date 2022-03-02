@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - User
 class UserResponse: Decodable {
     let response: UserItem
 }
@@ -29,11 +30,42 @@ class User: Decodable {
     }
 }
 
+// MARK: - Photo
+class PhotoResponse: Decodable {
+    let response: PhotoItem
+}
+
+class PhotoItem: Decodable {
+    let items: [Photo]
+}
+
 class Photo: Decodable {
     var owner_id = 0
     var url = ""
+    var sizes: [Size]
+    
+//    var likes =
+    
+    enum CodingKeys: String, CodingKey {
+        case owner_id
+        case url
+        case sizes
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let item = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.owner_id = try item.decode(Int.self, forKey: .owner_id)
+        self.sizes = try item.decode([Size].self, forKey: .sizes)
+    }
+    
+    struct Size: Codable {
+        var url = ""
+        var type = ""
+    }
 }
 
+// MARK: - Group
 class Group: Decodable {
     var id = 0
     var avatar = ""

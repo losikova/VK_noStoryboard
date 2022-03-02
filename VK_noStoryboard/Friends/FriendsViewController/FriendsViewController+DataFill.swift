@@ -10,27 +10,22 @@ import UIKit
 extension FriendsViewController {
     
     func fillFriendsArray() {
-        webService.getFriends { friends in
+        webService.getFriends { [weak self] friends in
             for friend in friends {
                 let url = URL(string: friend.avatar)!
                 let imageData = try? Data(contentsOf: url)
                 
                 let name = "\(friend.first_name) \(friend.last_name)"
                 let avatar = UIImage(data: imageData!)
-                let photos = self.getPhotos(of: friend.id)
                 
-                let newFriend = Friend(name: name, avatar: avatar!, photos: photos)
-                self.friendsArray.append(newFriend)
+                let newFriend = Friend(name: name, avatar: avatar!, id: friend.id)
+                self?.friendsArray.append(newFriend)
             }
-            self.friendsArray.sort(by: {$0.name < $1.name})
-            self.fillSectionLetters()
-            self.loadingView.isHidden = true
-            self.friendsTableView.reloadData()
+            self?.friendsArray.sort(by: {$0.name < $1.name})
+            self?.fillSectionLetters()
+            self?.loadingView.isHidden = true
+            self?.friendsTableView.reloadData()
         }
-    }
-    
-    func getPhotos(of id: Int) -> [UIImage] {
-        return [UIImage]()
     }
     
     func fillSectionLetters() {

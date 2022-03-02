@@ -10,7 +10,8 @@ import UIKit
 struct Friend {
     var name: String
     var avatar: UIImage
-    var photos: [UIImage]
+    var id: Int
+//    var photos: [UIImage]
 }
 
 struct GroupUI {

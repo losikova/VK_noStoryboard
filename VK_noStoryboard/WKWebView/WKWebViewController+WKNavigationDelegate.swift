@@ -30,8 +30,9 @@ extension WKWebViewController: WKNavigationDelegate {
         guard let token = params["access_token"] else { return }
         
         session.token = token
-        let sessionJSON = vkJSON(token: Session.instance.token)
+        let sessionJSON = vkJSON(token: session.token)
         
+        print(token)
 //        sessionJSON.getFriends { friends in
 //            print(friends.count)
 //            friends.forEach({ print($0.last_name)})
