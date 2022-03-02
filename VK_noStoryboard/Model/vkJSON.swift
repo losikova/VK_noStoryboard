@@ -16,8 +16,6 @@ class vkJSON {
     }
     
 //    enum Objects: String {
-//        case friends = "/friends.get"
-//        case photos = "/photos.get"
 //        case groups = "/groups.get"
 //        case groupOf = "/groups.search"
 //    }
@@ -35,10 +33,9 @@ class vkJSON {
 
         Alamofire.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
-            var friends = [User]()
             
             do {
-                friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
+                let friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
                 completion(friends)
             } catch {
                 print(error)
@@ -57,12 +54,26 @@ class vkJSON {
 
         Alamofire.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
-//            var photos = [Photo]()
 
             do {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
-                print(photos)
                 completion(photos)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func getGroups(completion: @escaping ([Group]) -> Void) {
+        params["extended"] = 1
+        let url = baseUrl + "/groups.get"
+
+        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+            guard let data = response.value else { return }
+
+            do {
+                let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
+                completion(groups)
             } catch {
                 print(error)
             }

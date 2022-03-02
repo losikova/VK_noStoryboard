@@ -66,13 +66,22 @@ class Photo: Decodable {
 }
 
 // MARK: - Group
+class GroupResponse: Decodable {
+    let response: GroupItem
+}
+
+class GroupItem: Decodable {
+    let items: [Group]
+}
+
 class Group: Decodable {
     var id = 0
     var avatar = ""
     var name = ""
-    var description = ""
     
     enum CodingKeys: String, CodingKey {
-        case avatar = "photo_200"
+        case avatar = "photo_100"
+        case id
+        case name
     }
 }
