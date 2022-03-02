@@ -30,22 +30,21 @@ class vkJSON {
     ]
     
     func getFriends(completion: @escaping ([User]) -> Void) {
-        params["fields"] = "nickname,photo_200_orig"
+        params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
-        
+
         Alamofire.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
             var friends = [User]()
-
-            DispatchQueue.main.async {
-                do {
-                    friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
-                    print(friends)
-                    completion(friends)
-                } catch {
-                    print(error)
-                }
+            
+            do {
+                friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
+                //                    print(friends)
+                completion(friends)
+            } catch {
+                print(error)
             }
+            
             
         }
     }

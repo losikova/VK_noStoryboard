@@ -13,6 +13,7 @@ class FriendsViewController: UIViewController {
     var friendsArray = [Friend]()
     var sectionLetters = [String]()
     
+    let loadingView = LoadingView()
     let webService = vkJSON(token: Session.instance.token)
     
     let friendsNames = [
@@ -38,9 +39,15 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         setup()
         
-        fillFriendsArray()
-        fillSectionLetters()
+        friendsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
+        friendsTableView.rowHeight = 70
+        friendsTableView.dataSource = self
+        friendsTableView.delegate = self
         
+        fillFriendsArray()
+    }
+    
+    func continueController() {
         friendsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         friendsTableView.rowHeight = 70
         friendsTableView.dataSource = self
@@ -59,6 +66,18 @@ class FriendsViewController: UIViewController {
             friendsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         friendsTableView.clipsToBounds = true
+        
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingView.heightAnchor.constraint(equalToConstant: 60),
+            loadingView.widthAnchor.constraint(equalToConstant: 240)
+        ])
+        loadingView.clipsToBounds = true
+        loadingView.isHidden = false
+        loadingView.animateLoading()
     }
     
 }

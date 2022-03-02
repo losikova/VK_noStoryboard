@@ -30,20 +30,21 @@ extension WKWebViewController: WKNavigationDelegate {
         guard let token = params["access_token"] else { return }
         
         session.token = token
+        let sessionJSON = vkJSON(token: Session.instance.token)
         
-        let sessionJSON = vkJSON(token: token)
-        
-        sessionJSON.getFriends { friends in
-            print(friends[0].first_name)
-        }
+//        sessionJSON.getFriends { friends in
+//            print(friends.count)
+//            friends.forEach({ print($0.last_name)})
+//            friends.forEach({ print($0)})
+//        }
 //        sessionJSON.getList(of: .photos)
 //        sessionJSON.getList(of: .groups)
 //        sessionJSON.getList(of: .groupOf)
         
         decisionHandler(.cancel)
         
-//        let tabBarController = TabBarViewController()
-//        tabBarController.modalPresentationStyle = .fullScreen
-//        present(tabBarController, animated: true, completion: nil)
+        let tabBarController = TabBarViewController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true, completion: nil)
     }
 }

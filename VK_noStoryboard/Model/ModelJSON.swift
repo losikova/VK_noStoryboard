@@ -22,7 +22,10 @@ class User: Decodable {
     var avatar = ""
 
     enum CodingKeys: String, CodingKey {
-        case avatar = "photo_200_orig"
+        case avatar = "photo_100"
+        case id
+        case first_name
+        case last_name
     }
 }
 
