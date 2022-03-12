@@ -73,7 +73,7 @@ class LoadingView: UIView {
         animation.fromValue = 0.1
         animation.toValue = 1
         animation.duration = 0.3
-        animation.repeatDuration = 5
+        animation.repeatDuration = 10
         animation.autoreverses = true
         
         self.subviews[1].layer.add(animation, forKey: nil)

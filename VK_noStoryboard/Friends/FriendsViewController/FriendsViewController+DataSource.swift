@@ -32,7 +32,7 @@ extension FriendsViewController: UITableViewDataSource {
         let friend = section[indexPath.row]
         let galleryController = GalleryViewController()
         
-        galleryController.photos = friend.photos
+        galleryController.userId = friend.id
         
         navigationController?.pushViewController(galleryController, animated: true)
     }

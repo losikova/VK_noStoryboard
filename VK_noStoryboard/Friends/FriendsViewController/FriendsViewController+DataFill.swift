@@ -10,11 +10,22 @@ import UIKit
 extension FriendsViewController {
     
     func fillFriendsArray() {
-        for (name, photos) in friendsNames {
-            let friend = User(name: name, avatar: UIImage(named: name)!, photos: photos)
-            friendsArray.append(friend)
+        webService.getFriends { [weak self] friends in
+            for friend in friends {
+                let url = URL(string: friend.avatar)!
+                let imageData = try? Data(contentsOf: url)
+                
+                let name = "\(friend.first_name) \(friend.last_name)"
+                let avatar = UIImage(data: imageData!)
+                
+                let newFriend = Friend(name: name, avatar: avatar!, id: friend.id)
+                self?.friendsArray.append(newFriend)
+            }
+            self?.friendsArray.sort(by: {$0.name < $1.name})
+            self?.fillSectionLetters()
+            self?.loadingView.isHidden = true
+            self?.friendsTableView.reloadData()
         }
-        friendsArray.sort(by: {$0.name < $1.name})
     }
     
     func fillSectionLetters() {
@@ -26,8 +37,8 @@ extension FriendsViewController {
         }
     }
     
-    func friendsBySection(letter: String) -> [User] {
-        var resultArray = [User]()
+    func friendsBySection(letter: String) -> [Friend] {
+        var resultArray = [Friend]()
         for friend in friendsArray {
             if friend.name.prefix(1).uppercased() == letter.uppercased() {
                 resultArray.append(friend)

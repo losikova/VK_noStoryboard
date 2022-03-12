@@ -6,20 +6,12 @@
 //
 
 import UIKit
-import Alamofire
 import WebKit
 
 class WKWebViewController: UIViewController {
     
     var webView = WKWebView()
     let session = Session.instance
-    
-    enum Objects: String {
-        case friends = "/friends.get"
-        case photos = "/photos.get"
-        case groups = "/groups.get"
-        case groupOf = "/groups.search"
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +44,7 @@ class WKWebViewController: UIViewController {
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "262150"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.68")
+            URLQueryItem(name: "v", value: "5.131")
         ]
         
         let request = URLRequest(url: urlComponents.url!)

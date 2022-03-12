@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DidSelectGroupProtocol: AnyObject {
-    func selectGroup(_ selectedGroup: Group?)
+    func selectGroup(_ selectedGroup: GroupUI?)
 }
 
 class AllGroupsViewController: UIViewController {
@@ -16,10 +16,10 @@ class AllGroupsViewController: UIViewController {
     let allGroupsTableView = UITableView()
     let searchBar = UISearchBar()
     
-    var groupArray = [Group]()
+    var groupArray = [GroupUI]()
     var delegate: DidSelectGroupProtocol?
 //    var selectedGroup: Group?
-    var savedGroupArray = [Group]()
+    var savedGroupArray = [GroupUI]()
     
     let groupsNames = [
         "Doggy",
@@ -29,7 +29,7 @@ class AllGroupsViewController: UIViewController {
     
     func fillGroupArray() {
         for name in groupsNames {
-            let group = Group(name: name, icon: UIImage(named: name)!)
+            let group = GroupUI(name: name, icon: UIImage(named: name)!)
             groupArray.append(group)
         }
     }

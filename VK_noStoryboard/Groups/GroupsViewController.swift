@@ -10,8 +10,10 @@ import UIKit
 class GroupsViewController: UIViewController {
 
     let userGroupsTableView = UITableView()
+    let webService = vkJSON(token: Session.instance.token)
+    let loadingView = LoadingView()
     
-    var groupArray = [Group]()
+    var groupArray = [GroupUI]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +24,10 @@ class GroupsViewController: UIViewController {
         userGroupsTableView.dataSource = self
         
         setup()
+        fillGroupsArray()
     }
     
-    func isItemAlreadyInArraay(group: Group) -> Bool {
+    func isItemAlreadyInArraay(group: GroupUI) -> Bool {
         return groupArray.contains{sourceGroup in
             sourceGroup.name == group.name
         }
@@ -43,9 +46,36 @@ class GroupsViewController: UIViewController {
         ])
         userGroupsTableView.clipsToBounds = true
         
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadingView.heightAnchor.constraint(equalToConstant: 60),
+            loadingView.widthAnchor.constraint(equalToConstant: 240)
+        ])
+        loadingView.clipsToBounds = true
+        loadingView.isHidden = false
+        loadingView.animateLoading()
+        
         let searchGroupsButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchGroups))
         searchGroupsButton.tintColor = .systemBlue
         navigationItem.setRightBarButton(searchGroupsButton, animated: true)
+    }
+    
+    private func fillGroupsArray() {
+        webService.getGroups { [weak self] allGroups in
+            for oneGroup in allGroups {
+                let url = URL(string: oneGroup.avatar)!
+                let imageData = try? Data(contentsOf: url)
+                let avatar = UIImage(data: imageData!)
+                
+                let newGroup = GroupUI(name: oneGroup.name, icon: avatar!)
+                self?.groupArray.append(newGroup)
+            }
+            self?.loadingView.isHidden = true
+            self?.userGroupsTableView.reloadData()
+        }
     }
     
     @objc private func searchGroups() {
@@ -77,7 +107,7 @@ extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension GroupsViewController: DidSelectGroupProtocol {
-    func selectGroup(_ selectedGroup: Group?) {
+    func selectGroup(_ selectedGroup: GroupUI?) {
         guard let selectedGroup = selectedGroup else {return}
         if isItemAlreadyInArraay(group: selectedGroup) {return}
         self.groupArray.append(selectedGroup)

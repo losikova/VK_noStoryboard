@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 import WebKit
 
 extension WKWebViewController: WKNavigationDelegate {
@@ -31,36 +30,22 @@ extension WKWebViewController: WKNavigationDelegate {
         guard let token = params["access_token"] else { return }
         
         session.token = token
-        print(token)
+        let sessionJSON = vkJSON(token: session.token)
         
-        getList(of: .friends)
-        getList(of: .photos)
-        getList(of: .groups)
-        getList(of: .groupOf)
+        print(token)
+//        sessionJSON.getFriends { friends in
+//            print(friends.count)
+//            friends.forEach({ print($0.last_name)})
+//            friends.forEach({ print($0)})
+//        }
+//        sessionJSON.getList(of: .photos)
+//        sessionJSON.getList(of: .groups)
+//        sessionJSON.getList(of: .groupOf)
         
         decisionHandler(.cancel)
-    }
-    
-    private func getList(of objects: Objects) {
-        let baseUrl = "https://api.vk.com/method"
         
-        var params: Parameters = [
-            "access_token": session.token,
-            "v": "5.131"
-        ]
-        
-        if objects == .photos {
-            params["album_id"] = "profile"
-        }
-        
-        if objects == .groupOf {
-            params["q"] = "Music"
-        }
-        
-        let url = baseUrl + objects.rawValue
-        
-        Alamofire.request(url, method: .get, parameters: params).responseJSON { repsonse in
-            print("\(objects): \(repsonse.value)")
-        }
+        let tabBarController = TabBarViewController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true, completion: nil)
     }
 }

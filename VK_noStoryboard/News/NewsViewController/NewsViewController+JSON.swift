@@ -9,13 +9,13 @@ import Foundation
 
 extension NewsViewController {
     
-    func getData() {
-        vkJSON().reguest { codabelData in
-            self.array = codabelData
-            self.newsTableView.reloadData()
-            print(codabelData, "Fetch")
-        }
-    }
+//    func getData() {
+//        vkJSON().reguest { codabelData in
+//            self.array = codabelData
+//            self.newsTableView.reloadData()
+//            print(codabelData, "Fetch")
+//        }
+//    }
     
     
 }
