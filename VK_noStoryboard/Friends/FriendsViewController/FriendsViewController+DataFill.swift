@@ -15,7 +15,7 @@ extension FriendsViewController {
                 let url = URL(string: friend.avatar)!
                 let imageData = try? Data(contentsOf: url)
                 
-                let name = "\(friend.first_name) \(friend.last_name)"
+                let name = "\(friend.firstName) \(friend.lastName)"
                 let avatar = UIImage(data: imageData!)
                 
                 let newFriend = Friend(name: name, avatar: avatar!, id: friend.id)

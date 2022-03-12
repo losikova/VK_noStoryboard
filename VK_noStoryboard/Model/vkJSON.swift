@@ -40,8 +40,6 @@ class vkJSON {
             } catch {
                 print(error)
             }
-            
-            
         }
     }
     
@@ -82,7 +80,7 @@ class vkJSON {
 
     //        if objects == .groupOf {
     //            params["q"] = "Music"
-    //        }s
+    //        }
     
     
 }

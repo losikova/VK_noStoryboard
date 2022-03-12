@@ -65,7 +65,7 @@ class CustomTableViewCell: UITableViewCell {
                        animations: {
             self.avatarImageView.frame = CGRect(x: frame.origin.x - scale/2, y: frame.origin.y - scale/2, width: frame.width + scale, height: frame.height + scale)
         },
-                       completion: {_ in
+                       completion: { _ in
             self.delegate?.performAfterTap(row: self.rowNumber)
         })
     }
