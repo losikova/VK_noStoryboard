@@ -40,7 +40,7 @@
 		B2782BDD27C16A4400977F87 /* FriendsViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BDC27C16A4400977F87 /* FriendsViewController+Delegate.swift */; };
 		B2782BDF27C16A7C00977F87 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */; };
 		B2782BE227C16ABB00977F87 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE127C16ABB00977F87 /* UserModel.swift */; };
-		B2782BE627C16ADB00977F87 /* vkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE527C16ADB00977F87 /* vkJSON.swift */; };
+		B2782BE627C16ADB00977F87 /* vkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE527C16ADB00977F87 /* vkService.swift */; };
 		B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE727C175C100977F87 /* AllGroupsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +81,7 @@
 		B2782BDC27C16A4400977F87 /* FriendsViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController+Delegate.swift"; sourceTree = "<group>"; };
 		B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B2782BE127C16ABB00977F87 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		B2782BE527C16ADB00977F87 /* vkJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkJSON.swift; sourceTree = "<group>"; };
+		B2782BE527C16ADB00977F87 /* vkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkService.swift; sourceTree = "<group>"; };
 		B2782BE727C175C100977F87 /* AllGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsViewController.swift; sourceTree = "<group>"; };
 		BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_noStoryboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -240,7 +240,7 @@
 				B248AE4927D0C3A700C5CD54 /* UserJSON.swift */,
 				B248AE4B27D0C3C000C5CD54 /* GroupJSON.swift */,
 				B248AE4D27D0C3F100C5CD54 /* PhotoJSON.swift */,
-				B2782BE527C16ADB00977F87 /* vkJSON.swift */,
+				B2782BE527C16ADB00977F87 /* vkService.swift */,
 				B263059A27C279C00014E39E /* Session.swift */,
 			);
 			path = Model;
@@ -384,7 +384,7 @@
 				B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */,
 				B2782BD227C1652500977F87 /* FriendsViewController.swift in Sources */,
 				B248AE4E27D0C3F100C5CD54 /* PhotoJSON.swift in Sources */,
-				B2782BE627C16ADB00977F87 /* vkJSON.swift in Sources */,
+				B2782BE627C16ADB00977F87 /* vkService.swift in Sources */,
 				B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */,
 				B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */,
 				B248AE4C27D0C3C000C5CD54 /* GroupJSON.swift in Sources */,

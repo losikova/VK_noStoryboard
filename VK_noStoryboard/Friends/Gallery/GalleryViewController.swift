@@ -9,7 +9,7 @@ import UIKit
 
 class GalleryViewController: UIViewController {
     
-    let webService = vkJSON(token: Session.instance.token)
+    let webService = vkService(token: Session.instance.token)
     var photos = [UIImage]()
     var userId = 0
     let loadingView = LoadingView()

@@ -17,6 +17,7 @@ class PhotoItem: Decodable {
 }
 
 class Photo: Object, Decodable {
+    @objc dynamic var id = 0
     @objc dynamic var ownerId = 0
     @objc dynamic var url = ""
     @objc dynamic var sizes: [Size]
@@ -24,6 +25,7 @@ class Photo: Object, Decodable {
 //    var likes =
     
     enum CodingKeys: String, CodingKey {
+        case id
         case owner_id = "owner_id"
         case url
         case sizes
@@ -32,6 +34,7 @@ class Photo: Object, Decodable {
     required init(from decoder: Decoder) throws {
         let item = try decoder.container(keyedBy: CodingKeys.self)
         
+        self.id = try item.decode(Int.self, forKey: .id)
         self.ownerId = try item.decode(Int.self, forKey: .owner_id)
         self.sizes = try item.decode([Size].self, forKey: .sizes)
     }

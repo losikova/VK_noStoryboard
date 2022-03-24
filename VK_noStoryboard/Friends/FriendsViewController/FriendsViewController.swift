@@ -14,7 +14,7 @@ class FriendsViewController: UIViewController {
     var sectionLetters = [String]()
     
     let loadingView = LoadingView()
-    let webService = vkJSON(token: Session.instance.token)
+    let webService = vkService(token: Session.instance.token)
     
 //    let friendsNames = [
 //        "Adele": [UIImage(named: "Adele")!, UIImage(named: "Adele")!, UIImage(named: "Adele")!],

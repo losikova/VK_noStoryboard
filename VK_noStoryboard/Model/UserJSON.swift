@@ -28,4 +28,8 @@ class User: Object, Decodable {
         case firstName = "first_name"
         case lastName = "last_name"
     }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }

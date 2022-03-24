@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 import Alamofire
+import RealmSwift
 
-class vkJSON {
+class vkService {
     
     init(token: String) {
         params["access_token"] = token
@@ -31,11 +32,14 @@ class vkJSON {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
 
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        Alamofire.request(url, method: .get, parameters: params).responseData {[weak self] response in
             guard let data = response.value else { return }
             
             do {
                 let friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
+                
+                self?.saveUserData(friends)
+                
                 completion(friends)
             } catch {
                 print(error)
@@ -77,6 +81,23 @@ class vkJSON {
             }
         }
     }
+    
+    func saveUserData(_ object: [User]) {
+        print(object)
+        do {
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            print(realm.configuration.fileURL)
+//            let oldData = realm.objects(Object.self).filter("id == %@", id)
+            realm.beginWrite()
+//            realm.delete(oldData)
+            realm.add(object)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+    
 
     //        if objects == .groupOf {
     //            params["q"] = "Music"
