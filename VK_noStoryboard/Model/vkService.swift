@@ -12,6 +12,15 @@ import RealmSwift
 
 class vkService {
     
+    private let realmService = RealmService()
+    private let baseUrl = "https://api.vk.com/method"
+    
+    private var params: Parameters = [
+        "access_token": "",
+        "v": "5.131"
+    ]
+    
+    
     init(token: String) {
         params["access_token"] = token
     }
@@ -21,24 +30,21 @@ class vkService {
 //        case groupOf = "/groups.search"
 //    }
     
-    private let baseUrl = "https://api.vk.com/method"
     
-    private var params: Parameters = [
-        "access_token": "",
-        "v": "5.131"
-    ]
     
     func getFriends(completion: @escaping ([User]) -> Void) {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
 
-        Alamofire.request(url, method: .get, parameters: params).responseData {[weak self] response in
+        AF.request(url, method: .get, parameters: params).responseData {[weak self] response in
             guard let data = response.value else { return }
             
             do {
                 let friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
-                
-                self?.saveUserData(friends)
+                DispatchQueue.main.async {
+                    self?.realmService.saveData(objects: friends)
+                }
+//                self?.saveUserData(friends)
                 
                 completion(friends)
             } catch {
@@ -53,8 +59,8 @@ class vkService {
         params["extended"] = 1
         
         let url = baseUrl + "/photos.get"
-
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        
+        AF.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
 
             do {
@@ -70,7 +76,7 @@ class vkService {
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
 
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        AF.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
 
             do {
@@ -79,22 +85,6 @@ class vkService {
             } catch {
                 print(error)
             }
-        }
-    }
-    
-    func saveUserData(_ object: [User]) {
-        print(object)
-        do {
-            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm(configuration: config)
-            print(realm.configuration.fileURL)
-//            let oldData = realm.objects(Object.self).filter("id == %@", id)
-            realm.beginWrite()
-//            realm.delete(oldData)
-            realm.add(object)
-            try realm.commitWrite()
-        } catch {
-            print(error)
         }
     }
     

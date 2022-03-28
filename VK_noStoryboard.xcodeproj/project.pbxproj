@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D8C47CD174E6A589A1901C0 /* Pods_VK_noStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */; };
 		B248AE3D27CBF5D900C5CD54 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */; };
 		B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */; };
 		B248AE4A27D0C3A700C5CD54 /* UserJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE4927D0C3A700C5CD54 /* UserJSON.swift */; };
@@ -42,11 +41,14 @@
 		B2782BE227C16ABB00977F87 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE127C16ABB00977F87 /* UserModel.swift */; };
 		B2782BE627C16ADB00977F87 /* vkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE527C16ADB00977F87 /* vkService.swift */; };
 		B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE727C175C100977F87 /* AllGroupsViewController.swift */; };
+		B29C687327F0EDE90025722F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = B29C687227F0EDE90025722F /* Realm */; };
+		B29C687527F0EDE90025722F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B29C687427F0EDE90025722F /* RealmSwift */; };
+		B29C687927F0F0640025722F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B29C687827F0F0640025722F /* Alamofire */; };
+		B29C687C27F0F15E0025722F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B29C687B27F0F15E0025722F /* Alamofire */; };
+		B2A8C60727ED3D7000EA675D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C60627ED3D7000EA675D /* RealmService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.release.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.release.xcconfig"; sourceTree = "<group>"; };
-		86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_noStoryboard.debug.xcconfig"; path = "Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard.debug.xcconfig"; sourceTree = "<group>"; };
 		B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebViewController+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		B248AE4927D0C3A700C5CD54 /* UserJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJSON.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		B2782BE127C16ABB00977F87 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B2782BE527C16ADB00977F87 /* vkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkService.swift; sourceTree = "<group>"; };
 		B2782BE727C175C100977F87 /* AllGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsViewController.swift; sourceTree = "<group>"; };
-		BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_noStoryboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2A8C60627ED3D7000EA675D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,21 +93,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D8C47CD174E6A589A1901C0 /* Pods_VK_noStoryboard.framework in Frameworks */,
+				B29C687927F0F0640025722F /* Alamofire in Frameworks */,
+				B29C687C27F0F15E0025722F /* Alamofire in Frameworks */,
+				B29C687527F0EDE90025722F /* RealmSwift in Frameworks */,
+				B29C687327F0EDE90025722F /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7566E67E5A9B2B1651FB0ED1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BD657D0E1885817A001C3A50 /* Pods_VK_noStoryboard.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		B248AE3E27CBFF4900C5CD54 /* WKWebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,8 +135,6 @@
 			children = (
 				B2782B9D27C120C900977F87 /* VK_noStoryboard */,
 				B2782B9C27C120C900977F87 /* Products */,
-				D3DA9A9B2727863110551E8C /* Pods */,
-				7566E67E5A9B2B1651FB0ED1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -242,17 +237,9 @@
 				B248AE4D27D0C3F100C5CD54 /* PhotoJSON.swift */,
 				B2782BE527C16ADB00977F87 /* vkService.swift */,
 				B263059A27C279C00014E39E /* Session.swift */,
+				B2A8C60627ED3D7000EA675D /* RealmService.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		D3DA9A9B2727863110551E8C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */,
-				710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,17 +249,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2782BB227C120CC00977F87 /* Build configuration list for PBXNativeTarget "VK_noStoryboard" */;
 			buildPhases = (
-				8C4BB3B71257B31835AD47EF /* [CP] Check Pods Manifest.lock */,
 				B2782B9727C120C900977F87 /* Sources */,
 				B2782B9827C120C900977F87 /* Frameworks */,
 				B2782B9927C120C900977F87 /* Resources */,
-				65E47F8FA8614760DB4DBE94 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = VK_noStoryboard;
+			packageProductDependencies = (
+				B29C687227F0EDE90025722F /* Realm */,
+				B29C687427F0EDE90025722F /* RealmSwift */,
+				B29C687827F0F0640025722F /* Alamofire */,
+				B29C687B27F0F15E0025722F /* Alamofire */,
+			);
 			productName = VK_noStoryboard;
 			productReference = B2782B9B27C120C900977F87 /* VK_noStoryboard.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +292,12 @@
 				Base,
 			);
 			mainGroup = B2782B9227C120C900977F87;
+			packageReferences = (
+				B29C687127F0EDE90025722F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				B29C687627F0EE550025722F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B29C687727F0F0640025722F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B29C687A27F0F15E0025722F /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = B2782B9C27C120C900977F87 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -322,48 +319,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		65E47F8FA8614760DB4DBE94 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VK_noStoryboard/Pods-VK_noStoryboard-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8C4BB3B71257B31835AD47EF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VK_noStoryboard-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		B2782B9727C120C900977F87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -382,6 +337,7 @@
 				B263059327C240ED0014E39E /* AvatarView.swift in Sources */,
 				B2782BDF27C16A7C00977F87 /* CustomTableViewCell.swift in Sources */,
 				B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */,
+				B2A8C60727ED3D7000EA675D /* RealmService.swift in Sources */,
 				B2782BD227C1652500977F87 /* FriendsViewController.swift in Sources */,
 				B248AE4E27D0C3F100C5CD54 /* PhotoJSON.swift in Sources */,
 				B2782BE627C16ADB00977F87 /* vkService.swift in Sources */,
@@ -536,7 +492,6 @@
 		};
 		B2782BB327C120CC00977F87 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86B502B4B7A2F423B503ED58 /* Pods-VK_noStoryboard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -565,7 +520,6 @@
 		};
 		B2782BB427C120CC00977F87 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 710B865AF3FF13E140C43D04 /* Pods-VK_noStoryboard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -614,6 +568,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B29C687127F0EDE90025722F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		B29C687627F0EE550025722F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		B29C687727F0F0640025722F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		B29C687A27F0F15E0025722F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B29C687227F0EDE90025722F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B29C687127F0EDE90025722F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		B29C687427F0EDE90025722F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B29C687127F0EDE90025722F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		B29C687827F0F0640025722F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B29C687627F0EE550025722F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		B29C687B27F0F15E0025722F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B29C687627F0EE550025722F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B2782BA727C120C900977F87 /* VK_noStoryboard.xcdatamodeld */ = {
