@@ -6,11 +6,6 @@
 //
 import UIKit
 
-struct GroupUI {
-    var name: String
-    var icon: UIImage
-}
-
 struct PostsJSON: Decodable {
     var userId: Int
     var id: Int

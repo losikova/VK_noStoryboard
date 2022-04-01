@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsViewController: UIViewController {
 
@@ -13,7 +14,8 @@ class GroupsViewController: UIViewController {
     let webService = vkService(token: Session.instance.token)
     let loadingView = LoadingView()
     
-    var groupArray = [GroupUI]()
+    var groupRealm = [Group]()
+    let realm = RealmService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +29,8 @@ class GroupsViewController: UIViewController {
         fillGroupsArray()
     }
     
-    func isItemAlreadyInArraay(group: GroupUI) -> Bool {
-        return groupArray.contains{sourceGroup in
+    func isItemAlreadyInArraay(group: Group) -> Bool {
+        return groupRealm.contains{sourceGroup in
             sourceGroup.name == group.name
         }
     }
@@ -55,7 +57,6 @@ class GroupsViewController: UIViewController {
             loadingView.widthAnchor.constraint(equalToConstant: 240)
         ])
         loadingView.clipsToBounds = true
-        loadingView.animateLoading(.start)
         
         let searchGroupsButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchGroups))
         searchGroupsButton.tintColor = .systemBlue
@@ -64,15 +65,7 @@ class GroupsViewController: UIViewController {
     
     private func fillGroupsArray() {
         webService.getGroups { [weak self] allGroups in
-            for oneGroup in allGroups {
-                let url = URL(string: oneGroup.avatar)!
-                let imageData = try? Data(contentsOf: url)
-                let avatar = UIImage(data: imageData!)
-                
-                let newGroup = GroupUI(name: oneGroup.name, icon: avatar!)
-                self?.groupArray.append(newGroup)
-            }
-            self?.loadingView.animateLoading(.stop)
+            self?.realm.readData(object: Group.self).forEach{ self?.groupRealm.append($0) }
             self?.userGroupsTableView.reloadData()
         }
     }
@@ -87,29 +80,35 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupArray.count
+        return groupRealm.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = userGroupsTableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as! CustomTableViewCell
         cell.avatarImageView.layer.cornerRadius = 25
-        cell.configure(group: groupArray[indexPath.row])
+        
+        loadingView.animateLoading(.start)
+        DispatchQueue.main.async {[weak self] in
+            cell.configure(group: (self?.groupRealm[indexPath.row])!)
+            self?.loadingView.animateLoading(.stop)
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            groupArray.remove(at: indexPath.row)
+            groupRealm.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }
 
 extension GroupsViewController: DidSelectGroupProtocol {
-    func selectGroup(_ selectedGroup: GroupUI?) {
+    func selectGroup(_ selectedGroup: Group?) {
         guard let selectedGroup = selectedGroup else {return}
         if isItemAlreadyInArraay(group: selectedGroup) {return}
-        self.groupArray.append(selectedGroup)
+        self.groupRealm.append(selectedGroup)
         userGroupsTableView.reloadData()
     }
     

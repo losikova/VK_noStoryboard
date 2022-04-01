@@ -38,8 +38,8 @@ class CustomTableViewCell: UITableViewCell {
         setupUI()
     }
     
-    func configure(group: GroupUI) {
-        avatarImageView.image = group.icon
+    func configure(group: Group) {
+        avatarImageView.image = getImage(url: group.avatar)
         nameLabel.text = group.name
         setupUI()
     }
