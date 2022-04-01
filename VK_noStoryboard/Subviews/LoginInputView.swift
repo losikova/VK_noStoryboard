@@ -16,7 +16,7 @@ class LoginInputView: UIView {
         login.textAlignment = .center
         login.textColor = .white
         login.backgroundColor = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1)
-        login.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        login.addTarget(LoginInputView.self, action: #selector(textFieldChanged), for: .editingChanged)
         return login
     }()
     
@@ -27,9 +27,9 @@ class LoginInputView: UIView {
         password.textAlignment = .center
         password.textColor = .white
         password.backgroundColor = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1)
-        password.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        password.addTarget(self, action: #selector(passwordClicked), for: .editingDidBegin)
-        password.addTarget(self, action: #selector(passwordEditingDidEnd), for: .editingDidEnd)
+        password.addTarget(LoginInputView.self, action: #selector(textFieldChanged), for: .editingChanged)
+        password.addTarget(LoginInputView.self, action: #selector(passwordClicked), for: .editingDidBegin)
+        password.addTarget(LoginInputView.self, action: #selector(passwordEditingDidEnd), for: .editingDidEnd)
         return password
     }()
     
@@ -38,7 +38,7 @@ class LoginInputView: UIView {
         eye.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         eye.tintColor = UIColor(red: 0.45, green: 0.46, blue: 0.47, alpha: 1.00)
         eye.isHidden = true
-        eye.addTarget(self, action: #selector(eyeClicked), for: .touchUpInside)
+        eye.addTarget(LoginInputView.self, action: #selector(eyeClicked), for: .touchUpInside)
         return eye
     }()
     

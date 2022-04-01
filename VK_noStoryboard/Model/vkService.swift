@@ -8,18 +8,11 @@
 import Foundation
 import UIKit
 import Alamofire
+import RealmSwift
 
-class vkJSON {
+class vkService {
     
-    init(token: String) {
-        params["access_token"] = token
-    }
-    
-//    enum Objects: String {
-//        case groups = "/groups.get"
-//        case groupOf = "/groups.search"
-//    }
-    
+    private let realmService = RealmService()
     private let baseUrl = "https://api.vk.com/method"
     
     private var params: Parameters = [
@@ -27,62 +20,61 @@ class vkJSON {
         "v": "5.131"
     ]
     
-    func getFriends(completion: @escaping ([User]) -> Void) {
+    
+    init(token: String) {
+        params["access_token"] = token
+    }
+    
+    func getFriends() {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
-
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        
+        AF.request(url, method: .get, parameters: params).responseData {[weak self] response in
             guard let data = response.value else { return }
             
             do {
-                let friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
-                completion(friends)
+                let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
+                self?.realmService.saveData(objects: friends)
             } catch {
                 print(error)
             }
-            
-            
         }
     }
     
-    func getPhotos(of userID: Int, completion: @escaping ([Photo]) -> Void) {
+    func getPhotos(of userID: Int) {
         params["album_id"] = "profile"
         params["owner_id"] = userID
         params["extended"] = 1
         
         let url = baseUrl + "/photos.get"
-
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        
+        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+            response in
             guard let data = response.value else { return }
-
+            
             do {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
-                completion(photos)
+                self?.realmService.saveData(objects: photos)
             } catch {
                 print(error)
             }
         }
     }
     
-    func getGroups(completion: @escaping ([Group]) -> Void) {
+    func getGroups() {
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
-
-        Alamofire.request(url, method: .get, parameters: params).responseData { response in
+        
+        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+            response in
             guard let data = response.value else { return }
-
+            
             do {
                 let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
-                completion(groups)
+                self?.realmService.saveData(objects: groups)
             } catch {
                 print(error)
             }
         }
     }
-
-    //        if objects == .groupOf {
-    //            params["q"] = "Music"
-    //        }s
-    
-    
 }

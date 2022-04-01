@@ -9,6 +9,11 @@ import UIKit
 
 class LoadingView: UIView {
 
+    enum Animate {
+        case start
+        case stop
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -66,22 +71,29 @@ class LoadingView: UIView {
         self.isHidden = true
     }
     
-    func animateLoading() {
+    func animateLoading(_ animate: Animate) {
         self.isHidden = false
         
         let animation = CABasicAnimation(keyPath: "opacity")
         animation.fromValue = 0.1
         animation.toValue = 1
         animation.duration = 0.3
-        animation.repeatDuration = 10
+        animation.repeatDuration = .infinity
         animation.autoreverses = true
         
-        self.subviews[1].layer.add(animation, forKey: nil)
-        animation.beginTime = CACurrentMediaTime() + 0.1
-        self.subviews[0].layer.add(animation, forKey: nil)
-        animation.beginTime = CACurrentMediaTime() + 0.2
-        self.subviews[2].layer.add(animation, forKey: nil)
-        
+        switch animate {
+        case .start:
+            self.isHidden = false
+            self.subviews[1].layer.add(animation, forKey: nil)
+            animation.beginTime = CACurrentMediaTime() + 0.1
+            self.subviews[0].layer.add(animation, forKey: nil)
+            animation.beginTime = CACurrentMediaTime() + 0.2
+            self.subviews[2].layer.add(animation, forKey: nil)
+        case .stop:
+            self.subviews[1].layer.removeAllAnimations()
+            self.subviews[0].layer.removeAllAnimations()
+            self.subviews[2].layer.removeAllAnimations()
+            self.isHidden = true
+        }
     }
-
 }

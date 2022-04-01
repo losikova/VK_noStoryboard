@@ -11,6 +11,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
 
     let photoImageView = UIImageView()
     let likesView = BottomItemView(item: .like)
+    let loadingView = LoadingView()
     
     static let identifier = "reuseIdentifierGallery"
     
@@ -56,6 +57,18 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         ])
         likesView.clipsToBounds = true
         
+        contentView.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            loadingView.heightAnchor.constraint(equalToConstant: 60),
+            loadingView.widthAnchor.constraint(equalToConstant: 240)
+        ])
+        loadingView.clipsToBounds = true
+        loadingView.animateLoading(.start)
+        
+        contentView.layoutIfNeeded()
     }
 
 }

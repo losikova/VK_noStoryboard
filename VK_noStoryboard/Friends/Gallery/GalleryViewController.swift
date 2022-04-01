@@ -6,13 +6,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GalleryViewController: UIViewController {
     
-    let webService = vkJSON(token: Session.instance.token)
-    var photos = [UIImage]()
+    var myPhotos: Results<Photo>? {
+        realm.readData(object: Photo.self)
+    }
+    var token: NotificationToken?
+    let webService = vkService(token: Session.instance.token)
+    var photosURL = [String]()
+    let realm = RealmService()
     var userId = 0
-    let loadingView = LoadingView()
 
     let galleryCollectionView : UICollectionView = {
         let size = (UIScreen.main.bounds.width - 9) / 2
@@ -39,11 +44,12 @@ class GalleryViewController: UIViewController {
         setupUI()
         
         fillPhotosArray()
+        createNotificationToken()
     }
     
     private func setupUI() {
         view.addSubview(galleryCollectionView)
-//        galleryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        galleryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             galleryCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             galleryCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -51,51 +57,78 @@ class GalleryViewController: UIViewController {
             galleryCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         galleryCollectionView.clipsToBounds = true
-        
-        view.addSubview(loadingView)
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loadingView.heightAnchor.constraint(equalToConstant: 60),
-            loadingView.widthAnchor.constraint(equalToConstant: 240)
-        ])
-        loadingView.clipsToBounds = true
-        loadingView.isHidden = false
-        loadingView.animateLoading()
-        
-        view.layoutIfNeeded()
     }
     
     private func fillPhotosArray() {
-        webService.getPhotos(of: userId) { [weak self] photos in
-            for photo in photos {
-                for photoSize in photo.sizes where photoSize.type == "r" {
-                    let url = URL(string: photoSize.url)!
-                    let imageData = try? Data(contentsOf: url)
-                    let onePhoto = UIImage(data: imageData!)
-                    
-                    self?.photos.append(onePhoto!)
-                    
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.webService.getPhotos(of: self.userId)
+        }
+        
+        realm.readData(object: Photo.self).forEach {
+            if $0.ownerId == userId {
+                $0.sizes.forEach { size in
+                    if size.type == "r" {
+                        photosURL.append(size.url)
+                    }
                 }
             }
-            self?.loadingView.isHidden = true
-            self?.galleryCollectionView.reloadData()
         }
+        galleryCollectionView.reloadData()
     }
-
+    
+    private func getImage(url: String) -> UIImage {
+        let url = URL(string: url)!
+        let imageData = try? Data(contentsOf: url)
+        
+        return UIImage(data: imageData!)!
+    }
 }
 
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photosURL.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as! GalleryCollectionViewCell
-        cell.photoImageView.image = photos[indexPath.item]
+        
+        cell.loadingView.animateLoading(.start)
+        DispatchQueue.main.async {[weak self] in
+            cell.photoImageView.image = self?.getImage(url: (self?.photosURL[indexPath.item])!)
+            
+            cell.loadingView.animateLoading(.stop)
+        }
         return cell
     }
-    
 }
 
+extension GalleryViewController {
+    func createNotificationToken() {
+        token = myPhotos?.observe { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .initial(let photosData):
+                print("\(photosData.count) photos")
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions ,
+                         modifications: let modifications):
+                
+                let deletionsIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+                
+                DispatchQueue.main.async {
+                    self.galleryCollectionView.performBatchUpdates {
+                        self.galleryCollectionView.deleteItems(at: deletionsIndexPath)
+                        self.galleryCollectionView.insertItems(at: insertionsIndexPath)
+                        self.galleryCollectionView.reloadItems(at: modificationsIndexPath)
+                    }
+                }
+            case .error(let error):
+                print("\(error)")
+            }
+        }
+    }
+}
