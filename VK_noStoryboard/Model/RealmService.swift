@@ -9,10 +9,16 @@ import Foundation
 import RealmSwift
 
 final class RealmService {
+    
+    enum ErrorStrings: Error {
+        case failedToRead(String)
+    }
+    
     private var realm: Realm
     
     init() {
         do {
+//            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             self.realm = try Realm()
             print(realm.configuration.fileURL)
         } catch {
@@ -36,9 +42,11 @@ final class RealmService {
     
     func readData<T: Object>(object: T.Type,
                              key: String,
-                             complition: @escaping(T) -> Void) {
+                             complition: @escaping(Result<T, Error>) -> Void) {
         if let result = realm.object(ofType: T.self, forPrimaryKey: key) {
-            complition(result)
+            complition(.success(result))
+        } else {
+            print(ErrorStrings.failedToRead("Faild To Read Object"))
         }
         
     }

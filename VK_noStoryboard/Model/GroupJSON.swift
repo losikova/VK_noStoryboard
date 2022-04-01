@@ -26,4 +26,8 @@ class Group: Object, Decodable {
         case id
         case name
     }
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

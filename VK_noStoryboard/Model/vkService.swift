@@ -25,13 +25,6 @@ class vkService {
         params["access_token"] = token
     }
     
-//    enum Objects: String {
-//        case groups = "/groups.get"
-//        case groupOf = "/groups.search"
-//    }
-    
-    
-    
     func getFriends(completion: @escaping ([User]) -> Void) {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
@@ -44,8 +37,6 @@ class vkService {
                 DispatchQueue.main.async {
                     self?.realmService.saveData(objects: friends)
                 }
-//                self?.saveUserData(friends)
-                
                 completion(friends)
             } catch {
                 print(error)
@@ -60,11 +51,15 @@ class vkService {
         
         let url = baseUrl + "/photos.get"
         
-        AF.request(url, method: .get, parameters: params).responseData { response in
+        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+            response in
             guard let data = response.value else { return }
 
             do {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
+                DispatchQueue.main.async {
+                    self?.realmService.saveData(objects: photos)
+                }
                 completion(photos)
             } catch {
                 print(error)
@@ -76,22 +71,19 @@ class vkService {
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
 
-        AF.request(url, method: .get, parameters: params).responseData { response in
+        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+            response in
             guard let data = response.value else { return }
 
             do {
                 let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
+                DispatchQueue.main.async {
+                    self?.realmService.saveData(objects: groups)
+                }
                 completion(groups)
             } catch {
                 print(error)
             }
         }
     }
-    
-
-    //        if objects == .groupOf {
-    //            params["q"] = "Music"
-    //        }
-    
-    
 }

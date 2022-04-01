@@ -19,28 +19,22 @@ class PhotoItem: Decodable {
 class Photo: Object, Decodable {
     @objc dynamic var id = 0
     @objc dynamic var ownerId = 0
-    @objc dynamic var url = ""
-    @objc dynamic var sizes: [Size]
-    
-//    var likes =
+//    @objc dynamic var url = ""
+    dynamic var sizes = List<Size>()
     
     enum CodingKeys: String, CodingKey {
         case id
-        case owner_id = "owner_id"
-        case url
+        case ownerId = "owner_id"
+//        case url
         case sizes
     }
     
-    required init(from decoder: Decoder) throws {
-        let item = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.id = try item.decode(Int.self, forKey: .id)
-        self.ownerId = try item.decode(Int.self, forKey: .owner_id)
-        self.sizes = try item.decode([Size].self, forKey: .sizes)
+    override class func primaryKey() -> String? {
+        return "id"
     }
-    
-    class Size: Object, Codable {
-        @objc dynamic var url = ""
-        @objc dynamic var type = ""
-    }
+}
+
+class Size: Object, Codable {
+    @objc dynamic var url = ""
+    @objc dynamic var type = ""
 }
