@@ -19,13 +19,11 @@ class PhotoItem: Decodable {
 class Photo: Object, Decodable {
     @objc dynamic var id = 0
     @objc dynamic var ownerId = 0
-//    @objc dynamic var url = ""
     dynamic var sizes = List<Size>()
     
     enum CodingKeys: String, CodingKey {
         case id
         case ownerId = "owner_id"
-//        case url
         case sizes
     }
     

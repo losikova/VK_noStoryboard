@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GalleryViewController: UIViewController {
     
     let webService = vkService(token: Session.instance.token)
-    var photos = [UIImage]()
+    var photosURL = [String]()
+    let realm = RealmService()
     var userId = 0
     let loadingView = LoadingView()
 
@@ -43,7 +45,7 @@ class GalleryViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(galleryCollectionView)
-//        galleryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        galleryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             galleryCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             galleryCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -68,33 +70,44 @@ class GalleryViewController: UIViewController {
     
     private func fillPhotosArray() {
         webService.getPhotos(of: userId) { [weak self] photos in
-            for photo in photos {
-                for photoSize in photo.sizes where photoSize.type == "r" {
-                    let url = URL(string: photoSize.url)!
-                    let imageData = try? Data(contentsOf: url)
-                    let onePhoto = UIImage(data: imageData!)
+            self?.realm.readData(object: Photo.self).forEach {
+                if $0.ownerId == self?.userId {
                     
-                    self?.photos.append(onePhoto!)
+                    $0.sizes.forEach { size in
+                        if size.type == "r" {
+                            self?.photosURL.append(size.url)
+                        }
+                    }
                     
                 }
             }
-            self?.loadingView.animateLoading(.stop)
             self?.galleryCollectionView.reloadData()
         }
     }
-
+    
+    private func getImage(url: String) -> UIImage {
+        let url = URL(string: url)!
+        let imageData = try? Data(contentsOf: url)
+        
+        return UIImage(data: imageData!)!
+    }
 }
 
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photosURL.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as! GalleryCollectionViewCell
-        cell.photoImageView.image = photos[indexPath.item]
+        
+        loadingView.animateLoading(.start)
+        DispatchQueue.main.async {[weak self] in
+            cell.photoImageView.image = self?.getImage(url: (self?.photosURL[indexPath.item])!)
+            
+            self?.loadingView.animateLoading(.stop)
+        }
         return cell
     }
-    
 }
 

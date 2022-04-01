@@ -36,8 +36,9 @@ class vkService {
                 let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
                 DispatchQueue.main.async {
                     self?.realmService.saveData(objects: friends)
+                    completion(friends)
                 }
-                completion(friends)
+                
             } catch {
                 print(error)
             }
@@ -59,8 +60,9 @@ class vkService {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
                 DispatchQueue.main.async {
                     self?.realmService.saveData(objects: photos)
+                    completion(photos)
                 }
-                completion(photos)
+                
             } catch {
                 print(error)
             }
