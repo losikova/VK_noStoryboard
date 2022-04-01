@@ -55,8 +55,7 @@ class GroupsViewController: UIViewController {
             loadingView.widthAnchor.constraint(equalToConstant: 240)
         ])
         loadingView.clipsToBounds = true
-        loadingView.isHidden = false
-        loadingView.animateLoading()
+        loadingView.animateLoading(.start)
         
         let searchGroupsButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchGroups))
         searchGroupsButton.tintColor = .systemBlue
@@ -73,7 +72,7 @@ class GroupsViewController: UIViewController {
                 let newGroup = GroupUI(name: oneGroup.name, icon: avatar!)
                 self?.groupArray.append(newGroup)
             }
-            self?.loadingView.isHidden = true
+            self?.loadingView.animateLoading(.stop)
             self?.userGroupsTableView.reloadData()
         }
     }

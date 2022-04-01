@@ -61,8 +61,7 @@ class GalleryViewController: UIViewController {
             loadingView.widthAnchor.constraint(equalToConstant: 240)
         ])
         loadingView.clipsToBounds = true
-        loadingView.isHidden = false
-        loadingView.animateLoading()
+        loadingView.animateLoading(.start)
         
         view.layoutIfNeeded()
     }
@@ -79,7 +78,7 @@ class GalleryViewController: UIViewController {
                     
                 }
             }
-            self?.loadingView.isHidden = true
+            self?.loadingView.animateLoading(.stop)
             self?.galleryCollectionView.reloadData()
         }
     }

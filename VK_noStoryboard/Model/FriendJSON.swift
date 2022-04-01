@@ -1,5 +1,5 @@
 //
-//  UserJSON.swift
+//  FriendJSON.swift
 //  VK_noStoryboard
 //
 //  Created by Анастасия Лосикова on 03.03.2022.
@@ -8,15 +8,15 @@
 import Foundation
 import RealmSwift
 
-class UserResponse: Decodable {
-    let response: UserItem
+class FriendResponse: Decodable {
+    let response: FriendItem
 }
 
-class UserItem: Decodable {
-    let items: [User]
+class FriendItem: Decodable {
+    let items: [Friend]
 }
 
-class User: Object, Decodable {
+class Friend: Object, Decodable {
     @objc dynamic var id = 0
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""

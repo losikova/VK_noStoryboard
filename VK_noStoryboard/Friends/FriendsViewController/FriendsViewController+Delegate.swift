@@ -12,5 +12,4 @@ extension FriendsViewController: UITableViewDelegate, CustomTableViewCellProtoco
     func performAfterTap(row: IndexPath) {
         tableView(friendsTableView, didSelectRowAt: row)
     }
-    
 }

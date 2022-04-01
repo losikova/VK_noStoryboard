@@ -33,8 +33,8 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     func configure(friend: Friend) {
-        avatarImageView.image = friend.avatar
-        nameLabel.text = friend.name
+        avatarImageView.image = getImage(url: friend.avatar)
+        nameLabel.text = "\(friend.firstName) \(friend.lastName)"
         setupUI()
     }
     
@@ -50,7 +50,14 @@ class CustomTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+    }
     
+    private func getImage(url: String) -> UIImage {
+        let url = URL(string: url)!
+        let imageData = try? Data(contentsOf: url)
+        
+        return UIImage(data: imageData!)!
     }
     
     @objc func imagePressed() {
@@ -119,6 +126,4 @@ extension CustomTableViewCell: CustomTableViewCellProtocol {
     func performAfterTap(row: IndexPath) {
         delegate?.performAfterTap(row: row)
     }
-    
-    
 }

@@ -25,7 +25,7 @@ class vkService {
         params["access_token"] = token
     }
     
-    func getFriends(completion: @escaping ([User]) -> Void) {
+    func getFriends(completion: @escaping ([Friend]) -> Void) {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
 
@@ -33,7 +33,7 @@ class vkService {
             guard let data = response.value else { return }
             
             do {
-                let friends = try! JSONDecoder().decode(UserResponse.self, from: data).response.items
+                let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
                 DispatchQueue.main.async {
                     self?.realmService.saveData(objects: friends)
                 }

@@ -17,7 +17,7 @@ extension LoginView {
         // Проверяем, верны ли они
         if login == "Admin" && password == "123456" {
             print("успешная авторизация")
-            self.loadingView.animateLoading()
+            self.loadingView.animateLoading(.start)
             Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
                 let succesfullNotification = Notification.Name("succesfullEnter")
                 NotificationCenter.default.post(name: succesfullNotification, object: nil)

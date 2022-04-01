@@ -18,8 +18,8 @@ final class RealmService {
     
     init() {
         do {
-//            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            self.realm = try Realm()
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            self.realm = try Realm(configuration: config)
             print(realm.configuration.fileURL)
         } catch {
             fatalError(error.localizedDescription)
