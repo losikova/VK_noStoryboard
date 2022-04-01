@@ -25,27 +25,23 @@ class vkService {
         params["access_token"] = token
     }
     
-    func getFriends(completion: @escaping ([Friend]) -> Void) {
+    func getFriends() {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
-
+        
         AF.request(url, method: .get, parameters: params).responseData {[weak self] response in
             guard let data = response.value else { return }
             
             do {
                 let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
-                DispatchQueue.main.async {
-                    self?.realmService.saveData(objects: friends)
-                    completion(friends)
-                }
-                
+                self?.realmService.saveData(objects: friends)
             } catch {
                 print(error)
             }
         }
     }
     
-    func getPhotos(of userID: Int, completion: @escaping ([Photo]) -> Void) {
+    func getPhotos(of userID: Int) {
         params["album_id"] = "profile"
         params["owner_id"] = userID
         params["extended"] = 1
@@ -55,34 +51,27 @@ class vkService {
         AF.request(url, method: .get, parameters: params).responseData {[weak self]
             response in
             guard let data = response.value else { return }
-
+            
             do {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
-                DispatchQueue.main.async {
-                    self?.realmService.saveData(objects: photos)
-                    completion(photos)
-                }
-                
+                self?.realmService.saveData(objects: photos)
             } catch {
                 print(error)
             }
         }
     }
     
-    func getGroups(completion: @escaping ([Group]) -> Void) {
+    func getGroups() {
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
-
+        
         AF.request(url, method: .get, parameters: params).responseData {[weak self]
             response in
             guard let data = response.value else { return }
-
+            
             do {
                 let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
-                DispatchQueue.main.async {
-                    self?.realmService.saveData(objects: groups)
-                }
-                completion(groups)
+                self?.realmService.saveData(objects: groups)
             } catch {
                 print(error)
             }

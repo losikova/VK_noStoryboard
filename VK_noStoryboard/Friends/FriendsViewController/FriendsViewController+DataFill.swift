@@ -10,12 +10,11 @@ import UIKit
 extension FriendsViewController {
     
     func fillFriendsArray() {
-        webService.getFriends { [weak self] friends in
-            self?.realm.readData(object: Friend.self).forEach{ self?.friendsRealm.append($0) }
-            self?.friendsRealm.sort(by: {$0.firstName < $1.firstName})
-            self?.fillSectionLetters()
-            self?.friendsTableView.reloadData()
-        }
+        webService.getFriends()
+        realm.readData(object: Friend.self).forEach{ friendsRealm.append($0) }
+        friendsRealm.sort(by: {$0.firstName < $1.firstName})
+        fillSectionLetters()
+        friendsTableView.reloadData()
     }
     
     func fillSectionLetters() {

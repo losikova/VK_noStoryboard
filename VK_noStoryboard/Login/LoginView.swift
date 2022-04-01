@@ -25,7 +25,7 @@ class LoginView: UIView {
         button.setTitle("Sing In", for: .normal)
         button.setTitleColor(titleColor, for: .normal)
         button.isEnabled = false
-        button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        button.addTarget(LoginView.self, action: #selector(loginButtonPressed), for: .touchUpInside)
         return button
     }()
     

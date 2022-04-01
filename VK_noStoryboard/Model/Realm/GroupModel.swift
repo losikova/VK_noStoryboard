@@ -1,5 +1,5 @@
 //
-//  GroupJSON.swift
+//  GroupModel.swift
 //  VK_noStoryboard
 //
 //  Created by Анастасия Лосикова on 03.03.2022.

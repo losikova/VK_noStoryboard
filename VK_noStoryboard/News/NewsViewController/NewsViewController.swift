@@ -52,7 +52,7 @@ class NewsViewController: UIViewController {
     }
     
     @objc func addPressed(_ sender: UIBarButtonItem) {
-        print(self.array.first?.title)
+        print(self.array.first?.title ?? "")
     }
 }
 

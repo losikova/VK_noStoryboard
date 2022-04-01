@@ -14,8 +14,12 @@ class GroupsViewController: UIViewController {
     let webService = vkService(token: Session.instance.token)
     let loadingView = LoadingView()
     
+    private var myGroups: Results<Group>? {
+        realm.readData(object: Group.self)
+    }
     var groupRealm = [Group]()
     let realm = RealmService()
+    var token: NotificationToken? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +29,9 @@ class GroupsViewController: UIViewController {
         userGroupsTableView.delegate = self
         userGroupsTableView.dataSource = self
         
-        setup()
+        setupUI()
         fillGroupsArray()
+        createNotificationToken()
     }
     
     func isItemAlreadyInArraay(group: Group) -> Bool {
@@ -35,7 +40,7 @@ class GroupsViewController: UIViewController {
         }
     }
     
-    private func setup() {
+    private func setupUI() {
         self.title = "My Groups"
         
         view.addSubview(userGroupsTableView)
@@ -64,10 +69,9 @@ class GroupsViewController: UIViewController {
     }
     
     private func fillGroupsArray() {
-        webService.getGroups { [weak self] allGroups in
-            self?.realm.readData(object: Group.self).forEach{ self?.groupRealm.append($0) }
-            self?.userGroupsTableView.reloadData()
-        }
+        webService.getGroups()
+        realm.readData(object: Group.self).forEach{ groupRealm.append($0) }
+        userGroupsTableView.reloadData()
     }
     
     @objc private func searchGroups() {
@@ -112,4 +116,38 @@ extension GroupsViewController: DidSelectGroupProtocol {
         userGroupsTableView.reloadData()
     }
     
+}
+
+private extension GroupsViewController {
+    func createNotificationToken() {
+        token = myGroups?.observe { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .initial(let groupsData):
+                print("\(groupsData.count) groups")
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions ,
+                         modifications: let modifications):
+
+                let deletionsIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+
+                DispatchQueue.main.async {
+                    self.userGroupsTableView.beginUpdates()
+
+                    self.userGroupsTableView.deleteRows(at: deletionsIndexPath, with: .automatic)
+
+                    self.userGroupsTableView.insertRows(at: insertionsIndexPath, with: .automatic)
+
+                    self.userGroupsTableView.reloadRows(at: modificationsIndexPath, with: .automatic)
+
+                    self.userGroupsTableView.endUpdates()
+                }
+            case .error(let error):
+                print("\(error)")
+            }
+        }
+    }
 }

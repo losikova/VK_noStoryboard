@@ -13,6 +13,10 @@ class FriendsViewController: UIViewController {
     let friendsTableView = UITableView()
     var sectionLetters = [String]()
     
+    var myFriends: Results<Friend>? {
+        realm.readData(object: Friend.self)
+    }
+    var token: NotificationToken?
     var friendsRealm = [Friend]()
     let loadingView = LoadingView()
     let webService = vkService(token: Session.instance.token)
@@ -28,6 +32,7 @@ class FriendsViewController: UIViewController {
         friendsTableView.delegate = self
         
         fillFriendsArray()
+        createNotificationToken()
     }
     
     func continueController() {
@@ -59,5 +64,40 @@ class FriendsViewController: UIViewController {
             loadingView.widthAnchor.constraint(equalToConstant: 240)
         ])
         loadingView.clipsToBounds = true
+    }
+}
+
+extension FriendsViewController {
+    func createNotificationToken() {
+        token = myFriends?.observe { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .initial(let friendsData):
+                print("\(friendsData.count) friends")
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions ,
+                         modifications: let modifications):
+
+                let deletionsIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+
+                DispatchQueue.main.async {
+                    self.friendsTableView.beginUpdates()
+
+                    self.friendsTableView.deleteRows(at: deletionsIndexPath, with: .automatic)
+
+                    self.friendsTableView.insertRows(at: insertionsIndexPath, with: .automatic)
+
+                    self.friendsTableView.reloadRows(at: modificationsIndexPath, with: .automatic)
+
+                    self.friendsTableView.endUpdates()
+                }
+            case .error(let error):
+                print("\(error)")
+            }
+        }
+
     }
 }
