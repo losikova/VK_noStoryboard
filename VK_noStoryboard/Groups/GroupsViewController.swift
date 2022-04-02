@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 class GroupsViewController: UIViewController {
 
@@ -20,6 +21,8 @@ class GroupsViewController: UIViewController {
     var groupRealm = [Group]()
     let realm = RealmService()
     var token: NotificationToken? = nil
+    let firebaneService = [FirebaseGroups]()
+    let ref = Database.database().reference(withPath: "Group")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +35,30 @@ class GroupsViewController: UIViewController {
         setupUI()
         fillGroupsArray()
         createNotificationToken()
+        
+        ref.observe(.value) { snapshot in
+            var groups: [FirebaseGroups] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let group = FirebaseGroups(snapshot: snapshot) {
+                    groups.append(group)
+                }
+            }
+            groups.forEach { print($0.name) }
+        }
     }
     
     func isItemAlreadyInArraay(group: Group) -> Bool {
         return groupRealm.contains{sourceGroup in
             sourceGroup.name == group.name
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let group = myGroups?[indexPath.row] else { return }
+        let fireCom = FirebaseGroups(name: group.name, id: group.id)
+        let groupRef = self.ref.child(group.name.lowercased())
+        groupRef.setValue(fireCom.toAnyObject())
     }
     
     private func setupUI() {
@@ -77,6 +98,7 @@ class GroupsViewController: UIViewController {
     @objc private func searchGroups() {
         let allGroupsController = AllGroupsViewController()
         allGroupsController.delegate = self
+        
         navigationController?.pushViewController(allGroupsController, animated: true)
     }
     
