@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Alamofire
 import RealmSwift
+import FirebaseDatabase
 
 class vkService {
     
@@ -29,12 +30,13 @@ class vkService {
         params["fields"] = "nickname,photo_100"
         let url = baseUrl + "/friends.get"
         
-        AF.request(url, method: .get, parameters: params).responseData {[weak self] response in
+        AF.request(url, method: .get, parameters: params).responseData {
+            response in
             guard let data = response.value else { return }
             
             do {
                 let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
-                self?.realmService.saveData(objects: friends)
+                self.realmService.saveData(objects: friends)
             } catch {
                 print(error)
             }
@@ -48,13 +50,13 @@ class vkService {
         
         let url = baseUrl + "/photos.get"
         
-        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+        AF.request(url, method: .get, parameters: params).responseData {
             response in
             guard let data = response.value else { return }
             
             do {
                 let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
-                self?.realmService.saveData(objects: photos)
+                self.realmService.saveData(objects: photos)
             } catch {
                 print(error)
             }
@@ -62,16 +64,25 @@ class vkService {
     }
     
     func getGroups() {
+        
+        let firebaneService = [FirebaseGroups]()
+        let ref = Database.database().reference(withPath: "Group")
+        
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
         
-        AF.request(url, method: .get, parameters: params).responseData {[weak self]
+        AF.request(url, method: .get, parameters: params).responseData {
             response in
             guard let data = response.value else { return }
             
             do {
                 let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
-                self?.realmService.saveData(objects: groups)
+//                groups.forEach { group in
+//                    let firebaseGroups = FirebaseGroups(name: group.name, id: group.id)
+//                    let groupsRef = ref.child(group.name.lowercased())
+//                    groupsRef.setValue(firebaseGroups.toAnyObject())
+//                }
+                self.realmService.saveData(objects: groups)
             } catch {
                 print(error)
             }
