@@ -35,50 +35,9 @@ class NewsViewController: UIViewController {
 //        getData()
     }
     
-    private func setupUI() {
-        view.addSubview(newsTableView)
-        newsTableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            newsTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            newsTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            newsTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            newsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        newsTableView.clipsToBounds = true
-        
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPressed(_:)))
-        addButton.tintColor = .systemBlue
-        navigationItem.setRightBarButton(addButton, animated: true)
-    }
-    
     @objc func addPressed(_ sender: UIBarButtonItem) {
         print(self.array.first?.title ?? "")
     }
-}
-
-extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArray.count
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = newsTableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as! NewsTableViewCell
-        
-        let news = newsArray[indexPath.item]
-        cell.avtor = news.avtor
-        cell.date = news.date
-        cell.inscriptionLabel.text = news.inscription
-        cell.photosView.image = news.image
-        
-        cell.delegate = self
-        
-        return cell
-    }
-
 }
 
 extension NewsViewController: NewsTableViewCellProtocol {

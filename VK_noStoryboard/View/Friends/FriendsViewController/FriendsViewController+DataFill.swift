@@ -9,6 +9,10 @@ import UIKit
 
 extension FriendsViewController {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
     func fillFriendsArray() {
         webService.getFriends()
         realm.readData(object: Friend.self).forEach{ friendsRealm.append($0) }
@@ -35,4 +39,5 @@ extension FriendsViewController {
         }
         return resultArray
     }
+    
 }

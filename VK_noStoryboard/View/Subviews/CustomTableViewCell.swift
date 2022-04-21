@@ -21,7 +21,7 @@ class CustomTableViewCell: UITableViewCell {
     let avatarImageView = UIImageView()
     let nameLabel = UILabel()
     
-    static let identifier = "reusableIdentifierCustomTableViewCell"     //почему static
+    static let identifier = "reusableIdentifierCustomTableViewCell"   
     
     var delegate: CustomTableViewCellProtocol?
     var rowNumber = IndexPath()

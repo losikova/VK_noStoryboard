@@ -13,24 +13,14 @@ class WKWebViewController: UIViewController {
     var webView = WKWebView()
     let session = Session.instance
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func loadView() {
+        super.loadView()
         setupUI()
-        setupWeb()
     }
     
-    private func setupUI() {
-        webView.navigationDelegate = self
-        view.addSubview(webView)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            webView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
-            webView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        webView.clipsToBounds = true
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupWeb()
     }
     
     private func setupWeb() {

@@ -8,6 +8,7 @@
 import UIKit
 
 extension FriendsViewController: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionLetters.count
     }
