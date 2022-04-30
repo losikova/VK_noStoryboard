@@ -21,13 +21,11 @@ extension FriendsViewController: UITableViewDataSource {
         let cell = friendsTableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         cell.avatarImageView.layer.cornerRadius = 25
         
-        loadingView.animateLoading(.start)
         DispatchQueue.main.async {[weak self] in
             cell.configure(friend: (self?.friendsBySection(letter: (self?.sectionLetters[indexPath.section])!)[indexPath.row])!)
             cell.rowNumber = indexPath
             
             cell.delegate = self
-            self?.loadingView.animateLoading(.stop)
         }
         return cell
     }

@@ -69,6 +69,10 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
         return groupArray.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = allGroupsTableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as! CustomTableViewCell
         cell.avatarImageView.layer.cornerRadius = 25

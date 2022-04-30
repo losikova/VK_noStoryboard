@@ -19,6 +19,7 @@ extension FriendsViewController {
         friendsRealm.sort(by: {$0.firstName < $1.firstName})
         fillSectionLetters()
         friendsTableView.reloadData()
+        loadingView.animateLoading(.stop)
     }
     
     func fillSectionLetters() {

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Alamofire
 import RealmSwift
-import FirebaseDatabase
+//import FirebaseDatabase
 
 class vkService {
     
@@ -65,8 +65,8 @@ class vkService {
     
     func getGroups() {
         
-        let firebaneService = [FirebaseGroups]()
-        let ref = Database.database().reference(withPath: "Group")
+//        let firebaneService = [FirebaseGroups]()
+//        let ref = Database.database().reference(withPath: "Group")
         
         params["extended"] = 1
         let url = baseUrl + "/groups.get"

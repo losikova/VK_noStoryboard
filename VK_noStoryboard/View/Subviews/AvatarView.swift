@@ -9,7 +9,7 @@ import UIKit
 
 class AvatarView: UIView {
     
-    private var photo = UIImageView()
+    var photo = UIImageView()
     var name = UILabel()
     var date = UILabel()
     
@@ -63,6 +63,13 @@ class AvatarView: UIView {
             date.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
         ])
         date.clipsToBounds = true
+    }
+    
+    override func removeFromSuperview() {
+        self.name.text = ""
+        self.date.text = ""
+        self.photo.image = nil
+        super.removeFromSuperview()
     }
 }
 

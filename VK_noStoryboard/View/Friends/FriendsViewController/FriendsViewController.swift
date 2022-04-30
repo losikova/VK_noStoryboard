@@ -29,6 +29,7 @@ class FriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.animateLoading(.start)
         
         friendsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         friendsTableView.dataSource = self
