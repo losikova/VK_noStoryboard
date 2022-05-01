@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22D874B281E6DD5001B242E /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D874A281E6DD5001B242E /* NewsModel.swift */; };
+		B22D874E281E6E9A001B242E /* FriendsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D874D281E6E9A001B242E /* FriendsService.swift */; };
+		B22D8750281E6F35001B242E /* GroupsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D874F281E6F35001B242E /* GroupsService.swift */; };
+		B22D8752281E6F6B001B242E /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D8751281E6F6B001B242E /* PhotoService.swift */; };
+		B22D8755281E71D8001B242E /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D8754281E71D8001B242E /* NewsService.swift */; };
+		B22D8757281E8006001B242E /* NewsViewController+DataFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D8756281E8006001B242E /* NewsViewController+DataFill.swift */; };
+		B22D8759281EC085001B242E /* NewsViewController+notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D8758281EC085001B242E /* NewsViewController+notifications.swift */; };
 		B248AE3D27CBF5D900C5CD54 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */; };
 		B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */; };
 		B248AE4A27D0C3A700C5CD54 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B248AE4927D0C3A700C5CD54 /* FriendModel.swift */; };
@@ -52,12 +59,19 @@
 		B2782BDB27C16A3B00977F87 /* FriendsViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BDA27C16A3B00977F87 /* FriendsViewController+DataSource.swift */; };
 		B2782BDD27C16A4400977F87 /* FriendsViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BDC27C16A4400977F87 /* FriendsViewController+Delegate.swift */; };
 		B2782BDF27C16A7C00977F87 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */; };
-		B2782BE627C16ADB00977F87 /* vkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE527C16ADB00977F87 /* vkService.swift */; };
+		B2782BE627C16ADB00977F87 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE527C16ADB00977F87 /* Service.swift */; };
 		B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2782BE727C175C100977F87 /* AllGroupsViewController.swift */; };
 		B2A8C60727ED3D7000EA675D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C60627ED3D7000EA675D /* RealmService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B22D874A281E6DD5001B242E /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		B22D874D281E6E9A001B242E /* FriendsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsService.swift; sourceTree = "<group>"; };
+		B22D874F281E6F35001B242E /* GroupsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsService.swift; sourceTree = "<group>"; };
+		B22D8751281E6F6B001B242E /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		B22D8754281E71D8001B242E /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
+		B22D8756281E8006001B242E /* NewsViewController+DataFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsViewController+DataFill.swift"; sourceTree = "<group>"; };
+		B22D8758281EC085001B242E /* NewsViewController+notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsViewController+notifications.swift"; sourceTree = "<group>"; };
 		B248AE3C27CBF5D900C5CD54 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		B248AE3F27CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebViewController+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		B248AE4927D0C3A700C5CD54 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
@@ -102,7 +116,7 @@
 		B2782BDA27C16A3B00977F87 /* FriendsViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController+DataSource.swift"; sourceTree = "<group>"; };
 		B2782BDC27C16A4400977F87 /* FriendsViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController+Delegate.swift"; sourceTree = "<group>"; };
 		B2782BDE27C16A7C00977F87 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		B2782BE527C16ADB00977F87 /* vkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkService.swift; sourceTree = "<group>"; };
+		B2782BE527C16ADB00977F87 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B2782BE727C175C100977F87 /* AllGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsViewController.swift; sourceTree = "<group>"; };
 		B2A8C60627ED3D7000EA675D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +135,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B22D874C281E6E79001B242E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B2A8C60627ED3D7000EA675D /* RealmService.swift */,
+				B2782BE527C16ADB00977F87 /* Service.swift */,
+				B22D874D281E6E9A001B242E /* FriendsService.swift */,
+				B22D874F281E6F35001B242E /* GroupsService.swift */,
+				B22D8751281E6F6B001B242E /* PhotoService.swift */,
+				B22D8754281E71D8001B242E /* NewsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B22D8753281E6FA7001B242E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B2782B9E27C120C900977F87 /* AppDelegate.swift */,
+				B2782BA027C120C900977F87 /* SceneDelegate.swift */,
+				B2782BAC27C120CC00977F87 /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		B248AE3E27CBFF4900C5CD54 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,9 +194,11 @@
 			children = (
 				B2782BD527C1668F00977F87 /* NewsViewController.swift */,
 				B2706C5E2811EE310098F9BF /* NewsViewController+setupUI.swift */,
+				B22D8756281E8006001B242E /* NewsViewController+DataFill.swift */,
 				B2706C622811EE810098F9BF /* NewsViewController+DataSource.swift */,
 				B2706C602811EE780098F9BF /* NewsViewController+Delegate.swift */,
 				B263059527C271A90014E39E /* NewsViewController+JSON.swift */,
+				B22D8758281EC085001B242E /* NewsViewController+notifications.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,24 +212,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		B2706C1C2811E6570098F9BF /* Core */ = {
+		B2706C1C2811E6570098F9BF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B2782B9E27C120C900977F87 /* AppDelegate.swift */,
-				B2782BA027C120C900977F87 /* SceneDelegate.swift */,
-				B2782BAC27C120CC00977F87 /* LaunchScreen.storyboard */,
+				B25C1EA427F84BC80017F52B /* GoogleService-Info.plist */,
+				B2782BAF27C120CC00977F87 /* Info.plist */,
 				B2782BAA27C120CC00977F87 /* Assets.xcassets */,
 			);
-			path = Core;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B2706C1F2811E9F80098F9BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B248AE3E27CBFF4900C5CD54 /* Login */,
 				B2782BC827C1622200977F87 /* Friends */,
 				B2782BC927C1622F00977F87 /* Groups */,
 				B2782BCA27C1624700977F87 /* News */,
-				B248AE3E27CBFF4900C5CD54 /* Login */,
 				B2782BC127C14B1C00977F87 /* Subviews */,
 			);
 			path = View;
@@ -202,7 +240,7 @@
 				B248AE4927D0C3A700C5CD54 /* FriendModel.swift */,
 				B248AE4B27D0C3C000C5CD54 /* GroupModel.swift */,
 				B248AE4D27D0C3F100C5CD54 /* PhotoModel.swift */,
-				B2A8C60627ED3D7000EA675D /* RealmService.swift */,
+				B22D874A281E6DD5001B242E /* NewsModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -226,11 +264,10 @@
 		B2782B9D27C120C900977F87 /* VK_noStoryboard */ = {
 			isa = PBXGroup;
 			children = (
-				B2706C1C2811E6570098F9BF /* Core */,
+				B22D8753281E6FA7001B242E /* Application */,
 				B2706C1F2811E9F80098F9BF /* View */,
 				B2782BE027C16AAE00977F87 /* Model */,
-				B25C1EA427F84BC80017F52B /* GoogleService-Info.plist */,
-				B2782BAF27C120CC00977F87 /* Info.plist */,
+				B2706C1C2811E6570098F9BF /* Resources */,
 			);
 			path = VK_noStoryboard;
 			sourceTree = "<group>";
@@ -294,8 +331,8 @@
 		B2782BE027C16AAE00977F87 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B22D874C281E6E79001B242E /* Service */,
 				B272722927F701190026AAEF /* Realm */,
-				B2782BE527C16ADB00977F87 /* vkService.swift */,
 				B263059A27C279C00014E39E /* Session.swift */,
 				B272722A27F702320026AAEF /* PostsJSON.swift */,
 			);
@@ -392,6 +429,7 @@
 				B249D08B2815E44D00EBFBAB /* BottomTableViewCell.swift in Sources */,
 				B2706C632811EE810098F9BF /* NewsViewController+DataSource.swift in Sources */,
 				B2706C5F2811EE310098F9BF /* NewsViewController+setupUI.swift in Sources */,
+				B22D874B281E6DD5001B242E /* NewsModel.swift in Sources */,
 				B2706C612811EE780098F9BF /* NewsViewController+Delegate.swift in Sources */,
 				B2782BDB27C16A3B00977F87 /* FriendsViewController+DataSource.swift in Sources */,
 				B263059127C240AB0014E39E /* BottomViewItem.swift in Sources */,
@@ -401,17 +439,20 @@
 				B2782BDF27C16A7C00977F87 /* CustomTableViewCell.swift in Sources */,
 				B2782B9F27C120C900977F87 /* AppDelegate.swift in Sources */,
 				B2A8C60727ED3D7000EA675D /* RealmService.swift in Sources */,
+				B22D8752281E6F6B001B242E /* PhotoService.swift in Sources */,
 				B2706C652811F55C0098F9BF /* AuthorTableViewCell.swift in Sources */,
 				B2706C192811E49E0098F9BF /* GalleryViewController+DateSource.swift in Sources */,
 				B249D0892815E38600EBFBAB /* ImageTableViewCell.swift in Sources */,
 				B2782BD227C1652500977F87 /* FriendsViewController.swift in Sources */,
 				B248AE4E27D0C3F100C5CD54 /* PhotoModel.swift in Sources */,
-				B2782BE627C16ADB00977F87 /* vkService.swift in Sources */,
+				B2782BE627C16ADB00977F87 /* Service.swift in Sources */,
 				B263058B27C23CB50014E39E /* GalleryViewController.swift in Sources */,
 				B248AE4027CBFF6700C5CD54 /* WKWebViewController+WKNavigationDelegate.swift in Sources */,
 				B248AE4C27D0C3C000C5CD54 /* GroupModel.swift in Sources */,
 				B2706C162811E3F60098F9BF /* GalleryCollectionViewCell+setupUI.swift in Sources */,
 				B2706C102811E23E0098F9BF /* FriendsViewController+notifications.swift in Sources */,
+				B22D8750281E6F35001B242E /* GroupsService.swift in Sources */,
+				B22D8759281EC085001B242E /* NewsViewController+notifications.swift in Sources */,
 				B2782BD927C16A2500977F87 /* FriendsViewController+DataFill.swift in Sources */,
 				B2706C122811E30E0098F9BF /* GalleryViewController+setupUI.swift in Sources */,
 				B2782BE827C175C100977F87 /* AllGroupsViewController.swift in Sources */,
@@ -423,7 +464,10 @@
 				B2782BA127C120C900977F87 /* SceneDelegate.swift in Sources */,
 				B248AE4A27D0C3A700C5CD54 /* FriendModel.swift in Sources */,
 				B2782BDD27C16A4400977F87 /* FriendsViewController+Delegate.swift in Sources */,
+				B22D8757281E8006001B242E /* NewsViewController+DataFill.swift in Sources */,
+				B22D8755281E71D8001B242E /* NewsService.swift in Sources */,
 				B2706C1B2811E50C0098F9BF /* GalleryViewController+Delegate.swift in Sources */,
+				B22D874E281E6E9A001B242E /* FriendsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,7 +610,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V39395A3DV;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VK_noStoryboard/Info.plist;
+				INFOPLIST_FILE = VK_noStoryboard/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -594,7 +638,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V39395A3DV;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VK_noStoryboard/Info.plist;
+				INFOPLIST_FILE = VK_noStoryboard/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

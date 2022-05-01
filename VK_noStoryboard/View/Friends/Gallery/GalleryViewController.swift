@@ -14,7 +14,7 @@ class GalleryViewController: UIViewController {
         realm.readData(object: Photo.self)
     }
     var token: NotificationToken?
-    let webService = vkService(token: Session.instance.token)
+    let webService = Service(token: Session.instance.token)
     var photosURL = [String]()
     let realm = RealmService()
     var userId = 0

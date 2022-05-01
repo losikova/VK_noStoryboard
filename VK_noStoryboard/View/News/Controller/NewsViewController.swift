@@ -6,17 +6,7 @@
 //
 
 import UIKit
-
-struct news {
-    var avtor: String
-    var date: String
-    var inscription: String?
-    var image: UIImage?
-}
-
-//protocol NewsTableViewCellProtocol: AnyObject {
-//    func setRowHeight(height: CGFloat)
-//}
+import RealmSwift
 
 class NewsViewController: UIViewController {
 
@@ -31,7 +21,6 @@ class NewsViewController: UIViewController {
     
     var array = [PostsJSON]()
     var sectionArray = [[RowName]]()
-//    var newsArrayByCells = [newsArray]()
     
     enum RowName {
         case author
@@ -39,6 +28,25 @@ class NewsViewController: UIViewController {
         case image
         case bottom
     }
+    
+    enum NewsType: String {
+        case post
+        case photo
+        case photoTag
+        case wallPhoto
+        case friend
+        case note
+        case audio
+        case video
+    }
+    
+    var myNewsfeed: Results<News>? {
+        realm.readData(object: News.self)
+    }
+    var token: NotificationToken?
+    var newsRealm = [News]()
+    let webService = Service(token: Session.instance.token)
+    let realm = RealmService()
     
     override func loadView() {
         super.loadView()
@@ -55,67 +63,7 @@ class NewsViewController: UIViewController {
         
         newsTableView.delegate = self
         newsTableView.dataSource = self
-    
-        rowsTypeBySection()
-    }
-    
-    func rowsTypeBySection() {
-        for news in 0...newsArray.count - 1 {
-            sectionArray.append([])
-            sectionArray[news].append(.author)
-            
-            if newsArray[news].inscription != nil &&
-                newsArray[news].image != nil
-            {
-                sectionArray[news].append(.inscription)
-                sectionArray[news].append(.image)
-                sectionArray[news].append(.bottom)
-            } else if newsArray[news].image == nil {
-                sectionArray[news].append(.inscription)
-                sectionArray[news].append(.bottom)
-            } else if newsArray[news].inscription == nil {
-                sectionArray[news].append(.image)
-                sectionArray[news].append(.bottom)
-            }
-        }
-    }
-    
-    func rowType(index: Int) -> RowName {
-        var itemNumber = 0
-        var rowName = RowName.author
-        for section in sectionArray {
-            let sectionStep = section.count - 1
-            if index <= (itemNumber + sectionStep) {
-                let num = index - itemNumber
-                rowName = section[num]
-                break
-            }
-            itemNumber += sectionStep
-        }
-        return rowName
-    }
-    
-    func newsNumber(by index: Int) -> Int {
-        var num = 0
-        for section in sectionArray {
-            for i in 0...section.count {
-                if i == index { return num }
-            }
-            num += 1
-        }
-        return num
-    }
-    
-    @objc func addPressed(_ sender: UIBarButtonItem) {
-        print(self.array.first?.title ?? "")
+        
+        fillNewsArray()
     }
 }
-
-//extension NewsViewController: NewsTableViewCellProtocol {
-//    func setRowHeight(height: CGFloat) {
-//        newsTableView.rowHeight = height
-//    }
-//
-//}
-
-

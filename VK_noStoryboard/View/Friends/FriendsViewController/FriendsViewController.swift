@@ -19,7 +19,7 @@ class FriendsViewController: UIViewController {
     var token: NotificationToken?
     var friendsRealm = [Friend]()
     let loadingView = LoadingView()
-    let webService = vkService(token: Session.instance.token)
+    let webService = Service(token: Session.instance.token)
     let realm = RealmService()
     
     override func loadView() {

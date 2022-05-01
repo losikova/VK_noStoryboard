@@ -12,7 +12,7 @@ import RealmSwift
 class GroupsViewController: UIViewController {
 
     let userGroupsTableView = UITableView()
-    let webService = vkService(token: Session.instance.token)
+    let webService = Service(token: Session.instance.token)
     let loadingView = LoadingView()
     
     private var myGroups: Results<Group>? {
