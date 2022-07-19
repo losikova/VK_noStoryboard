@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import FirebaseDatabase
 
 final class GroupsViewController: UIViewController {
 
@@ -31,8 +30,6 @@ final class GroupsViewController: UIViewController {
     private var groupRealm = [Group]()
     private let realm = RealmService()
     private var token: NotificationToken? = nil
-    private let firebaneService = [FirebaseGroups]()
-    private let ref = Database.database().reference(withPath: "Group")
     
     // MARK: Init
     override func viewDidLoad() {
@@ -45,17 +42,6 @@ final class GroupsViewController: UIViewController {
         setupUI()
         fillGroupsArray()
         createNotificationToken()
-        
-        ref.observe(.value) { snapshot in
-            var groups: [FirebaseGroups] = []
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot,
-                   let group = FirebaseGroups(snapshot: snapshot) {
-                    groups.append(group)
-                }
-            }
-            groups.forEach { print($0.name) }
-        }
     }
 }
 
@@ -154,9 +140,6 @@ extension GroupsViewController: DidSelectGroupProtocol {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let group = myGroups?[indexPath.row] else { return }
-        let fireCom = FirebaseGroups(name: group.name, id: group.id)
-        let groupRef = self.ref.child(group.name.lowercased())
-        groupRef.setValue(fireCom.toAnyObject())
     }
 }
 

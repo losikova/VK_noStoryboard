@@ -1,13 +1,16 @@
 //
-//  AvatarView.swift
+//  NewsAuthorCell.swift
 //  VK_noStoryboard
 //
-//  Created by Анастасия Лосикова on 20.02.2022.
+//  Created by Анастасия Лосикова on 7/19/22.
 //
 
 import UIKit
 
-final class AvatarView: UIView {
+final class NewsAuthorCell: UITableViewCell {
+    
+    // MARK: Public properties
+    static let identifier = "reusableIdentifierNewsAuthorCell"
     
     // MARK: Private Properties
     private var photo: UIImageView = {
@@ -33,43 +36,43 @@ final class AvatarView: UIView {
     }()
     
     // MARK: Init
-    func configure(rame: CGRect, name: String, date: String) {
+    func configure(name: String, date: String) {
         self.name.text = name
         self.date.text = date
-        setup()
+        setupView()
     }
 }
 
-// MARK: - Private SetupUI
-private extension AvatarView {
+// MARK: - Private
+private extension NewsAuthorCell {
     
-    func setup() {
-        self.addSubview(photo)
-        self.addSubview(name)
-        self.addSubview(date)
+    func setupView() {
+        addSubview(photo)
+        addSubview(name)
+        addSubview(date)
         
         NSLayoutConstraint.activate([
-            photo.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            photo.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            photo.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
+            photo.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            photo.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            photo.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
             photo.widthAnchor.constraint(equalTo: photo.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            name.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            name.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            name.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            name.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             name.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16),
             name.bottomAnchor.constraint(equalTo: date.topAnchor, constant: -8)
         ])
         
         NSLayoutConstraint.activate([
-            date.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            date.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            date.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            date.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             date.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
         ])
         
         photo.image = UIImage(named: name.text!)
         layoutIfNeeded()
-        photo.layer.cornerRadius = (self.bounds.height - 16) / 2
+        photo.layer.cornerRadius = (bounds.height - 16) / 2
     }
 }
