@@ -30,18 +30,10 @@ private extension NewsFooterCell {
     
     func setupView() {
 
-        addSubview(bottomView)
-        bottomView.addSubview(likesView)
-        bottomView.addSubview(commentView)
-        bottomView.addSubview(shareView)
-        bottomView.addSubview(viewsView)
-        
-        NSLayoutConstraint.activate([
-            bottomView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            bottomView.leftAnchor.constraint(equalTo: leftAnchor),
-            bottomView.rightAnchor.constraint(equalTo: rightAnchor)
-        ])
+        addSubview(likesView)
+        addSubview(commentView)
+        addSubview(shareView)
+        addSubview(viewsView)
     }
 }
 

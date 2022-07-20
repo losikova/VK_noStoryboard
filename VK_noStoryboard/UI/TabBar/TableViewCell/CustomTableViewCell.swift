@@ -73,6 +73,7 @@ final class CustomTableViewCell: UITableViewCell {
 private extension CustomTableViewCell {
         
     func setupUI() {
+        self.selectionStyle = .none
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = view.bounds.width / 2

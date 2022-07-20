@@ -6,10 +6,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class NewsMainView: UIView {
     
     // MARK: Private Properties
+    private let webService = vkService(token: Session.instance.token)
+    private let realm = RealmService()
+    private var newsRealm = [News]()
+    /// Данные, полученные с сервера
+    private var allNews: Results<News>? {
+        realm.readData(object: News.self)
+    }
     private enum Section: CaseIterable {
         case author
         case description
@@ -27,6 +35,7 @@ final class NewsMainView: UIView {
     private var array = [PostsJSON]()
     private let newsArray = [
         news(avtor: "Adele", date: "12:12:12", inscription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image: UIImage(named: "Adele")!)]
+    private var token: NotificationToken? = nil
     
     // MARK: Init
     init() {
@@ -48,6 +57,7 @@ final class NewsMainView: UIView {
 
 // MARK: - Private
 private extension NewsMainView {
+    
     
     func setupView() {
         addSubview(newsTableView)
@@ -72,7 +82,7 @@ extension NewsMainView: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return newsRealm.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,13 +95,13 @@ extension NewsMainView: UITableViewDataSource {
                 withIdentifier: NewsAuthorCell.identifier,
                 for: indexPath) as? NewsAuthorCell else { fatalError("Could not create author cell") }
             cell.configure(name: newsArray[0].avtor,
-                           date: newsArray[0].date)
+                           date: newsRealm[indexPath.section].date)
             return cell
         case .description:
             guard let cell = newsTableView.dequeueReusableCell(
                 withIdentifier: NewsDescriptionCell.identifier,
                 for: indexPath) as? NewsDescriptionCell else { fatalError("Could not create description cell") }
-            cell.configure(description: newsArray[0].inscription)
+            cell.configure(description: newsRealm[indexPath.section].text)
             return cell
         case .photos:
             guard let cell = newsTableView.dequeueReusableCell(
@@ -159,4 +169,48 @@ private extension NewsMainView {
     //    }
     
     
+}
+
+
+// MARK: - Notifications
+extension NewsMainView {
+    
+    func fillNewsArray() {
+        webService.getNews()
+        realm.readData(object: News.self).forEach{ newsRealm.append($0) }
+        newsTableView.reloadData()
+    }
+    
+    func createNotificationToken() {
+        token = allNews?.observe { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .initial(let newsData):
+                print("\(newsData.count) news")
+                self.newsTableView.reloadData()
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions ,
+                         modifications: let modifications):
+
+                let deletionsIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+
+                DispatchQueue.main.async {
+                    self.newsTableView.beginUpdates()
+
+                    self.newsTableView.deleteRows(at: deletionsIndexPath, with: .automatic)
+
+                    self.newsTableView.insertRows(at: insertionsIndexPath, with: .automatic)
+
+                    self.newsTableView.reloadRows(at: modificationsIndexPath, with: .automatic)
+
+                    self.newsTableView.endUpdates()
+                }
+            case .error(let error):
+                print("\(error)")
+            }
+        }
+    }
 }

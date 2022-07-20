@@ -36,9 +36,9 @@ final class NewsAuthorCell: UITableViewCell {
     }()
     
     // MARK: Init
-    func configure(name: String, date: String) {
+    func configure(name: String, date: Int) {
         self.name.text = name
-        self.date.text = date
+        self.date.text = getDate(from: Double(date))
         setupView()
     }
 }
@@ -74,5 +74,18 @@ private extension NewsAuthorCell {
         photo.image = UIImage(named: name.text!)
         layoutIfNeeded()
         photo.layer.cornerRadius = (bounds.height - 16) / 2
+    }
+    
+    func getDate(from date: Double) -> String {
+        let time = NSDate(timeIntervalSince1970: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: NSLocale.system.identifier) as Locale?
+        dateFormatter.dateFormat = "hh:mm a"
+        let dateAsString = dateFormatter.string(from: time as Date)
+        dateFormatter.dateFormat = "h:mm a"
+        let date = dateFormatter.date(from: dateAsString)
+        dateFormatter.dateFormat = "HH:mm"
+        let date24 = dateFormatter.string(from: date!)
+        return date24
     }
 }

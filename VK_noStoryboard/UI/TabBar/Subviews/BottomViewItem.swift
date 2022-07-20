@@ -38,13 +38,13 @@ final class BottomItemView: UIView {
         self.itemKind = item
         switch itemKind {
         case .like:
-            super.init(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+            super.init(frame: CGRect(x: 10, y: 8, width: 40, height: 20))
         case .comment:
-            super.init(frame: CGRect(x: 60, y: 0, width: 40, height: 20))
+            super.init(frame: CGRect(x: 70, y: 8, width: 40, height: 20))
         case .share:
-            super.init(frame: CGRect(x: 120, y: 0, width: 40, height: 20))
+            super.init(frame: CGRect(x: 130, y: 8, width: 40, height: 20))
         case .views(let width):
-            super.init(frame: CGRect(x: width - 40, y: 0, width: 40, height: 20))
+            super.init(frame: CGRect(x: width - 40, y: 8, width: 40, height: 20))
         }
         
         setup()

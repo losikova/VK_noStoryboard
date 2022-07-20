@@ -68,10 +68,10 @@ private extension GalleryCollectionViewCell {
         addSubview(loadingView)
         
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photoImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            photoImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            photoImageView.topAnchor.constraint(equalTo: topAnchor),
+            photoImageView.leftAnchor.constraint(equalTo: leftAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            photoImageView.rightAnchor.constraint(equalTo: rightAnchor)
         ])
         
         NSLayoutConstraint.activate([

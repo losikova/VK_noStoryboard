@@ -51,8 +51,11 @@ final class GalleryViewController: UIViewController {
         
         print("Tapped User ID: \(userId)")
         
-        fillPhotosArray()
-        createNotificationToken()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.fillPhotosArray()
+            self.createNotificationToken()
+        }
     }
 }
 
@@ -64,12 +67,10 @@ extension GalleryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as! GalleryCollectionViewCell
+        guard let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as? GalleryCollectionViewCell else { fatalError("Could not create gallery cell") }
         
-        cell.loadingView.animateLoading(.start)
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             cell.photoImageView.image = self?.getImage(url: (self?.photosURL[indexPath.item])!)
-            
             cell.loadingView.animateLoading(.stop)
         }
         return cell
@@ -101,6 +102,7 @@ private extension GalleryViewController {
             switch result {
             case .initial(let photosData):
                 print("\(photosData.count) photos")
+                self.galleryCollectionView.reloadData()
             case .update(_ ,
                          deletions: let deletions,
                          insertions: let insertions ,
@@ -130,10 +132,7 @@ private extension GalleryViewController {
     
     /// Заполнениие массива фотографий с сервера
     func fillPhotosArray() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.webService.getPhotos(of: self.userId)
-        }
+        webService.getPhotos(of: self.userId)
         
         realm.readData(object: Photo.self).forEach {
             if $0.ownerId == userId {

@@ -111,10 +111,14 @@ extension GroupsViewController: UITableViewDataSource {
         let cell = userGroupsTableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as! CustomTableViewCell
         cell.avatarImageView.layer.cornerRadius = 25
         
-        loadingView.animateLoading(.start)
+        let loading = DispatchWorkItem { [weak self] in
+            self?.loadingView.animateLoading(.start)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: loading)
+        
         DispatchQueue.main.async {[weak self] in
             cell.configure(group: (self?.groupRealm[indexPath.row])!)
-            self?.loadingView.animateLoading(.stop)
+            loading.cancel()
         }
         
         return cell

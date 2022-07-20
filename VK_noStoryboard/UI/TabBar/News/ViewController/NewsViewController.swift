@@ -24,4 +24,10 @@ final class NewsViewController: UIViewController {
         super.loadView()
         view = mainView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.fillNewsArray()
+        mainView.createNotificationToken()
+    }
 }
