@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import Alamofire
 import RealmSwift
-import FirebaseDatabase
 
 class vkService {
     
@@ -35,7 +34,7 @@ class vkService {
             guard let data = response.value else { return }
             
             do {
-                let friends = try! JSONDecoder().decode(FriendResponse.self, from: data).response.items
+                let friends = try JSONDecoder().decode(FriendResponse.self, from: data).response.items
                 self.realmService.saveData(objects: friends)
             } catch {
                 print(error)
@@ -55,7 +54,7 @@ class vkService {
             guard let data = response.value else { return }
             
             do {
-                let photos = try! JSONDecoder().decode(PhotoResponse.self, from: data).response.items
+                let photos = try JSONDecoder().decode(PhotoResponse.self, from: data).response.items
                 self.realmService.saveData(objects: photos)
             } catch {
                 print(error)
@@ -64,10 +63,6 @@ class vkService {
     }
     
     func getGroups() {
-        
-        let firebaneService = [FirebaseGroups]()
-        let ref = Database.database().reference(withPath: "Group")
-        
         params["extended"] = 1
         let url = baseUrl + "/groups.get"
         
@@ -76,13 +71,25 @@ class vkService {
             guard let data = response.value else { return }
             
             do {
-                let groups = try! JSONDecoder().decode(GroupResponse.self, from: data).response.items
-//                groups.forEach { group in
-//                    let firebaseGroups = FirebaseGroups(name: group.name, id: group.id)
-//                    let groupsRef = ref.child(group.name.lowercased())
-//                    groupsRef.setValue(firebaseGroups.toAnyObject())
-//                }
+                let groups = try JSONDecoder().decode(GroupResponse.self, from: data).response.items
                 self.realmService.saveData(objects: groups)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func getNews() {
+        params["filters"] = "post"
+        let url = baseUrl + "/newsfeed.get"
+        
+        AF.request(url, method: .get, parameters: params).responseData {
+            response in
+            guard let data = response.value else { return }
+            
+            do {
+                let news = try JSONDecoder().decode(NewsResponse.self, from: data).response.items
+                self.realmService.saveData(objects: news)
             } catch {
                 print(error)
             }
